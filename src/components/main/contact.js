@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from "react";
-import db from '../../firebase'
+// import db from '../../firebase'
 const Contact = () => {
     const initailFieldValues = {
         fullname: '',
@@ -19,16 +19,16 @@ const Contact = () => {
 
     const handleSubmit = e => {
         e.preventDefault();
-        db.child('contacts').push(
-            values,
-            err => {
-                if (err) {
-                    console.log(err);
-                }else {
-                    setValues({...initailFieldValues});
-                }
-            }
-        );
+        // db.child('contacts').push(
+        //     values,
+        //     err => {
+        //         if (err) {
+        //             console.log(err);
+        //         }else {
+        //             setValues({...initailFieldValues});
+        //         }
+        //     }
+        // );
     }
 
   return (
