@@ -18,8 +18,8 @@ export default function App() {
       
   <br/>
   <Route path="/" exact component={Dashboard} />
-  <Route path="/Order" component={Order} />
   <Route path="/OrderList"  component={OrderList} />
+  <Route exact path="/Order/:id" component={Order}/>
  
   </div>
   </Router>
