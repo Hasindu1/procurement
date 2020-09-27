@@ -44,7 +44,7 @@ const OrderList = () =>{
                             <h6>Job Reference No : {order.id}</h6> 
                             <h6>Total      : {order.total}</h6> 
                                 <div className="todo-icon">
-                                    <span className="mx-2 text-primary"><i className="fas fa-envelope"></i><i className="fas fa-share fa-xs"></i></span>
+                                    <span className={order.total >=  1000000 ? 'mx-2 text-primary' : 'mx-2 text-primary invisible'}><i className="fas fa-envelope"></i><i className="fas fa-share fa-xs"></i></span>
                                 </div>
                         </li>
                      </Link> 
