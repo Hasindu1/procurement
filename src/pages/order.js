@@ -9,6 +9,8 @@ export default class Order extends Component {
     constructor(props){
         super(props);
 
+        this.onChangeRemarks = this.onChangeRemarks.bind(this);
+        this.onSubmit = this.onSubmit.bind(this);
 
         this.state = {
             comment:'',
@@ -21,7 +23,9 @@ export default class Order extends Component {
             status:'',
             supplier:'',
             total:0,
-            unit:0
+            unit:0,
+            remarks:'',
+            id:''
 
         };
     }
@@ -46,8 +50,8 @@ export default class Order extends Component {
                 status:res.data().status,
                 supplier:res.data().supplier,
                 total:res.data().total,
-                unit:res.data().unit
-        
+                unit:res.data().unit,
+                id:this.props.match.params.id
             })
 
             
@@ -56,7 +60,40 @@ export default class Order extends Component {
        
 }
 
+onChangeRemarks(e){
+    this.setState({
+        remarks:e.target.value
+    })
+}
+
+onSubmit(e){
+
+    e.preventDefault();
+
+
+    firebase
+    .firestore()
+    .collection('orders')
+    .doc(this.props.match.params.id)
+    .set({
+        comment:this.state.comment,
+        date:this.state.date,
+        description:this.state.description,
+        draft:this.state.draft,
+        product:this.state.product,
+        quantity:this.state.quantity,
+        site:this.state.site,
+        status:this.state.status,
+        supplier:this.state.supplier,
+        total:this.state.total,
+        unit:this.state.unit,
+        remarks: this.state.remarks
+    })
     
+
+}
+
+
 
 
     render() {
@@ -67,11 +104,11 @@ export default class Order extends Component {
                 
                 <center><h3 style={{marginTop:20}}><u>Order Request</u></h3></center>
     
-                <form>
+                
     
         <h3>Company Details</h3>
     
-    
+            <form onSubmit={this.onSubmit}>
                     <div className="form-group">
                         <label> Company Name :</label>
                         <input type="text" className="form-control"  value={this.state.site} readOnly/>
@@ -164,24 +201,25 @@ export default class Order extends Component {
                     
                     <center>
                     <div className="form-group">
-                        <button className="btn btn-success"> Approve </button> &nbsp;
-                        <button className="btn btn-danger"> Decline </button> &nbsp;
-                        <button className="btn btn-primary"> Reffered </button> &nbsp;
-                        <button className="btn btn-warning"> Partially Approve</button> &nbsp;
+                        <button type="submit" className="btn btn-success"> Approve </button> &nbsp;
+                        <button type="submit" className="btn btn-danger"> Decline </button> &nbsp;
+                        <button type="submit" className="btn btn-primary"> Reffered </button> &nbsp;
+                        <button type="submit" className="btn btn-warning"> Partially Approve</button> &nbsp;
                     </div>
                     </center>
     
                     <div className="form-group">
                             <label>Remarks</label>
-                            <textarea id="w3review" name="w3review" rows="4" cols="50" className="form-control">
-                                Remarks
+                            <textarea id="w3review" name="w3review" rows="4" cols="50" className="form-control" value={this.state.remarks} onChange={this.onChangeRemarks}>
+                                {this.state.remarks}
                             </textarea>
                      </div>
     
     
                 </form>
     
-                </div>
+               
+               </div>
     
             </>
           
