@@ -11,6 +11,7 @@ function useOrders(){
         const unsubscribe = firebase
             .firestore()
             .collection('orders')
+            .where('draft','==',false)
             .onSnapshot((snapshot) => {
                 const newOrders = snapshot.docs.map((doc) => ({
                     id: doc.id,
