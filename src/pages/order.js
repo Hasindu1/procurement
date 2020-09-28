@@ -10,6 +10,7 @@ export default class Order extends Component {
         super(props);
 
         this.onChangeRemarks = this.onChangeRemarks.bind(this);
+        this.changeStatus = this.changeStatus.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
 
         this.state = {
@@ -24,8 +25,7 @@ export default class Order extends Component {
             supplier:'',
             total:0,
             unit:0,
-            remarks:'',
-            id:''
+            remarks:''
 
         };
     }
@@ -93,6 +93,14 @@ onSubmit(e){
 
 }
 
+changeStatus(e) {
+
+    this.setState({
+        status:e.target.value
+    })
+
+   
+}
 
 
 
@@ -201,10 +209,10 @@ onSubmit(e){
                     
                     <center>
                     <div className="form-group">
-                        <button type="submit" className="btn btn-success"> Approve </button> &nbsp;
-                        <button type="submit" className="btn btn-danger"> Decline </button> &nbsp;
-                        <button type="submit" className="btn btn-primary"> Reffered </button> &nbsp;
-                        <button type="submit" className="btn btn-warning"> Partially Approve</button> &nbsp;
+                        <button type="submit" className="btn btn-success" value="approved" onClick={this.changeStatus}> Approve </button> &nbsp;
+                        <button type="submit" className="btn btn-danger" value="declined" onClick={this.changeStatus}> Decline </button> &nbsp;
+                        <button type="submit" className="btn btn-primary" value="Sent To Reference" onClick={this.changeStatus}> Reffered </button> &nbsp;
+                        <button type="submit" className="btn btn-warning" value="partially approved" onClick={this.changeStatus}> Partially Approve</button> &nbsp;
                     </div>
                     </center>
     
