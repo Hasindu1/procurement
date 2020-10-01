@@ -12,14 +12,16 @@ import Order from './pages/order'
 import OrderList from './pages/orderList'
 import AuthManagerOrderList from './pages/authManagerOrederList'
 import AuthManagerOrder from './pages/authManagerOrder'
+import login from './pages/login'
 
 export default function App() {
   return (
     <Router>
     <div className="container">
-      
-  <br/>
-  <Route exact path="/" exact component={Dashboard} />
+      <br/>
+
+  <Route exact path="/" component={login} />
+  <Route path="/Dashboard" component={Dashboard} />
   <Route path="/OrderList"  component={OrderList} />
   <Route path="/Order/:id" component={Order}/>
   <Route path="/AuthManagerOrderList"  component={AuthManagerOrderList} />
