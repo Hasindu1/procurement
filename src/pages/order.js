@@ -14,6 +14,7 @@ export default class Order extends Component {
         this.onSubmit = this.onSubmit.bind(this);
 
         this.state = {
+            //Order Properties
             comment:'',
             date:'',
             description:'',
@@ -25,7 +26,20 @@ export default class Order extends Component {
             supplier:'',
             total:0,
             unit:0,
-            remarks:''
+            remarks:'',
+
+            //Supplier Properties
+            supAddress:'',
+            supContact:'',
+            supEmail:'',
+
+            //Site Properties
+            siteAddress:'',
+            siteContact:'',
+            siteEmail:''
+
+
+
 
         };
     }
@@ -54,10 +68,39 @@ export default class Order extends Component {
                 id:this.props.match.params.id
             })
 
-            
+            firebase
+            .firestore()
+            .collection('suppliers')
+            .doc("XJqlIZ8wRVkSdV8y6Y4H")
+            .get()
+            .then(response => {
+             this.setState({
+                     supAddress:response.data().address,
+                     supContact:response.data().contact,
+                     supEmail:response.data().email
+            })
+
         })
 
+        
+        firebase
+        .firestore()
+        .collection('sites')
+        .doc("6WQFswR1LTvKTsGj0Xls")
+        .get()
+        .then(response => {
+         this.setState({
+                 siteAddress:response.data().address,
+                 siteContact:response.data().contact,
+                 siteEmail:response.data().email
+                })
+
+         })
+
        
+     })
+
+
 }
 
 onChangeRemarks(e){
@@ -125,20 +168,20 @@ changeStatus(e) {
                     <div className="form-group">
                        
                         <label> Address:</label>
-                        <span><input type="text" className="form-control" readOnly/></span>    
+                        <span><input type="text" className="form-control" value={this.state.siteAddress} readOnly/></span>    
                         
                     </div>
     
                     <div className="form-group">
                        
                        <label> Email:</label>
-                       <span><input type="email" className="form-control" readOnly/></span>    
+                       <span><input type="email" className="form-control" value={this.state.siteEmail} readOnly/></span>    
                        
                    </div>
     
                     <div className="form-group">
                         <label> Contact No</label>
-                        <input type="tel" className="form-control" readOnly/>
+                        <input type="tel" className="form-control" value={this.state.siteContact} readOnly/>
                     </div>
     
     
@@ -175,20 +218,20 @@ changeStatus(e) {
                     <div className="form-group">
        
                             <label> Address:</label>
-                            <span><input type="text" className="form-control" readOnly/></span>    
+                            <span><input type="text" className="form-control" value={this.state.supAddress} readOnly/></span>    
         
                     </div>
     
                     <div className="form-group">
        
                              <label> Email:</label>
-                            <span><input type="email" className="form-control" readOnly/></span>    
+                            <span><input type="email" className="form-control" value={this.state.supEmail} readOnly/></span>    
        
                     </div>
     
                     <div className="form-group">
                              <label> Contact No</label>
-                            <input type="tel" className="form-control" readOnly/>
+                            <input type="tel" className="form-control" value={this.state.supContact} readOnly/>
                     </div>
     
     
