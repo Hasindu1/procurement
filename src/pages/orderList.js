@@ -42,10 +42,13 @@ const OrderList = () =>{
                 {orders.map((order) => 
                     <Link to={"/Order/"+order.id}> 
                         <li className="list-group-item text-capitalize d-flex justify-content-between my-2">
-                            <h6>Job Reference No : {order.id}</h6> 
-                            <h6>Total      : {order.total}</h6> 
+                        <ul>
+                             <li> <h6>Job Reference No : {order.id}</h6></li>
+                             <li><h6>Total      : {order.total}</h6></li>
+                        </ul>
+                            
                                 <div className="todo-icon">
-                                    <span className={order.total >=  1000000 ? 'mx-2 text-primary' : 'mx-2 text-primary invisible'}><i className="fas fa-envelope"></i><i className="fas fa-share fa-xs"></i></span>
+                                    <span className={order.total >=  1000000 ? 'mx-2 text-primary' : 'mx-2 text-primary invisible'}><i className="fas fa-envelope"></i><i className="fas fa-share"></i></span>
                                 </div>
                         </li>
                      </Link> 
