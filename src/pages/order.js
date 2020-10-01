@@ -21,19 +21,20 @@ export default class Order extends Component {
             draft:'',
             product:'',
             quantity:0,
-            site:'',
             status:'',
-            supplier:'',
             total:0,
             unit:0,
             remarks:'',
+            orderId:'',
 
             //Supplier Properties
+            supplier:'',
             supAddress:'',
             supContact:'',
             supEmail:'',
 
             //Site Properties
+            site:'',
             siteAddress:'',
             siteContact:'',
             siteEmail:''
@@ -60,12 +61,11 @@ export default class Order extends Component {
                 draft:res.data().draft,
                 product:res.data().product,
                 quantity:res.data().quantity,
-                site:res.data().site,
                 status:res.data().status,
                 supplier:res.data().supplier,
                 total:res.data().total,
                 unit:res.data().unit,
-                id:this.props.match.params.id
+                orderId:this.props.match.params.id
             })
 
             firebase
@@ -75,6 +75,7 @@ export default class Order extends Component {
             .get()
             .then(response => {
              this.setState({
+                     supplier:response.data().name,
                      supAddress:response.data().address,
                      supContact:response.data().contact,
                      supEmail:response.data().email
@@ -90,6 +91,7 @@ export default class Order extends Component {
         .get()
         .then(response => {
          this.setState({
+                 site:response.data().name,
                  siteAddress:response.data().address,
                  siteContact:response.data().contact,
                  siteEmail:response.data().email
@@ -158,12 +160,18 @@ changeStatus(e) {
                 
     
         <h3>Company Details</h3>
-    
+
             <form onSubmit={this.onSubmit}>
-                    <div className="form-group">
+
+                <div style={{float:'right'}}>
+                        <label> Order Id :</label>
+                        <input type="text"  value={this.state.orderId} readOnly/>
+                </div>
+                <br/>
+                <div className="form-group">
                         <label> Company Name :</label>
-                        <input type="text" className="form-control"  value={this.state.site} readOnly/>
-                    </div>
+                        <input type="text" className="form-control" value={this.state.site} readOnly/>
+                </div>
     
                     <div className="form-group">
                        
