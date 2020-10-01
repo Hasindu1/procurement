@@ -10,7 +10,7 @@ export default function dashboard() {
         <>
         <NavBar/>
         <div class="jumbotron" style={{marginTop: 20}}>
-            <h2 style={{textAlign: "center"}}><u>Welcome to the Our Procurement System Admin DashBaord  !</u></h2>
+            <h2 style={{textAlign: "center"}}><u>Welcome to the Our Procurement System Admin DashBaord</u></h2>
         </div>
        </>
     )
