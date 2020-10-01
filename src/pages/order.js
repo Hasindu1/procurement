@@ -260,10 +260,12 @@ changeStatus(e) {
                     
                     <center>
                     <div className="form-group">
-                        <button type="submit" className="btn btn-success" value="approved" onClick={this.changeStatus}> Approve </button> &nbsp;
-                        <button type="submit" className="btn btn-danger" value="declined" onClick={this.changeStatus}> Decline </button> &nbsp;
+                        <button type="submit" className="btn btn-success" value="approved" onClick={this.changeStatus} disabled={this.state.total >= 1000000 }> Approve </button> &nbsp;
+                        <button type="submit" className="btn btn-warning" value="partially approved" onClick={this.changeStatus} disabled={this.state.total >= 1000000 }> Partially Approve</button> &nbsp;
                         <button type="submit" className="btn btn-primary" value="Sent To Reference" onClick={this.changeStatus}> Reffered </button> &nbsp;
-                        <button type="submit" className="btn btn-warning" value="partially approved" onClick={this.changeStatus}> Partially Approve</button> &nbsp;
+                        <button type="submit" className="btn btn-danger" value="declined" onClick={this.changeStatus} disabled={this.state.total >= 1000000 }> Decline </button> &nbsp;
+
+                        
                     </div>
                     </center>
     
