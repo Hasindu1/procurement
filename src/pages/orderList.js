@@ -2,6 +2,7 @@ import React, {useState,useEffect} from 'react'
 import NavBar from '../components/navbar'
 import firebase from '../Firebase'
 import { Link } from 'react-router-dom';
+import { getByTestId } from '@testing-library/react';
 
 
 function useOrders(){
@@ -27,6 +28,17 @@ function useOrders(){
     return orders
 }
 
+function markedAsReffered(id){
+
+            firebase
+            .firestore()
+            .collection('orders')
+            .doc(id)
+            .update({
+                status:"Sent To Reference",
+            })
+    
+}
 
 const OrderList = () =>{
 
@@ -48,7 +60,7 @@ const OrderList = () =>{
                         </ul>
                             
                                 <div className="todo-icon">
-                                    <span className={order.total >=  1000000 ? 'mx-2 text-primary' : 'mx-2 text-primary invisible'}><i className="fas fa-envelope"></i><i className="fas fa-share"></i></span>
+                                    <span className={order.total >=  1000000  && order.status == "pending" ? 'mx-2 text-primary' : 'mx-2 text-primary invisible'}><i className="fas fa-envelope" onClick={markedAsReffered.bind(null,order.id)}></i><i className="fas fa-share"></i></span>
                                 </div>
                         </li>
                      </Link> 
