@@ -17,6 +17,8 @@ import SupplierList from "./pages/supplierList"
 import SiteList from "./pages/siteList"
 import newSupplier from "./pages/newSupplier"
 import newSite from "./pages/newSite"
+import modifySupplier from "./pages/modifySupplier"
+import modifySite from "./pages/modifySite"
 
 export default function App() {
   return (
@@ -34,6 +36,8 @@ export default function App() {
   <Route path="/newSupplier" component={newSupplier}/>
   <Route path="/SiteList" component={SiteList}/>
   <Route path="/newSite" component={newSite}/>
+  <Route path="/modifySupplier:id" component={modifySupplier}/>
+  <Route path="/modifySite:id" component={modifySite}/>
   </div>
   </Router>
   )

@@ -44,6 +44,7 @@ const SiteList = () =>{
                 
                 {sites.map((site) => 
                    
+                   <Link to={"/modifySite"+site.id}>
                         <li className="list-group-item text-capitalize d-flex justify-content-between my-2">
                         <ul>
                              <li> <h6>Site ID : {site.id}</h6></li>
@@ -51,7 +52,7 @@ const SiteList = () =>{
                         </ul>
                             
                         </li>
-                    
+                    </Link>
                 )}
             </ul>
        </>

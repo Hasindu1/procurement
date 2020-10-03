@@ -43,7 +43,7 @@ const SupplierList = () =>{
                 <h2 className="text-capitalize text-center">Supplier List </h2>
                 
                 {suppliers.map((supplier) => 
-                   
+                  <Link to={"/modifySupplier"+supplier.id}>
                         <li className="list-group-item text-capitalize d-flex justify-content-between my-2">
                         <ul>
                              <li> <h6>Supplier ID : {supplier.id}</h6></li>
@@ -51,7 +51,7 @@ const SupplierList = () =>{
                         </ul>
                             
                         </li>
-                    
+                </Link> 
                 )}
             </ul>
        </>
