@@ -28,12 +28,14 @@ export default class Order extends Component {
             orderId:'',
 
             //Supplier Properties
+            suppliers:[],
             supplier:'',
             supAddress:'',
             supContact:'',
             supEmail:'',
 
             //Site Properties
+            sites:[],
             site:'',
             siteAddress:'',
             siteContact:'',
@@ -71,15 +73,17 @@ export default class Order extends Component {
             firebase
             .firestore()
             .collection('suppliers')
-            .doc("XJqlIZ8wRVkSdV8y6Y4H")
+            .where("name","==",res.data().supplier)
             .get()
             .then(response => {
-             this.setState({
-                     supplier:response.data().name,
-                     supAddress:response.data().address,
-                     supContact:response.data().contact,
-                     supEmail:response.data().email
-            })
+                    response.data().forEach(sup => {
+                        this.setState({
+                            supplier:sup.name,
+                            supAddress:sup.address,
+                            supContact:sup.contact,
+                            supEmail:sup.email,
+                        });
+                    });
 
         })
 
@@ -87,15 +91,18 @@ export default class Order extends Component {
         firebase
         .firestore()
         .collection('sites')
-        .doc("6WQFswR1LTvKTsGj0Xls")
+        .where("name","==",res.data().site)
         .get()
         .then(response => {
-         this.setState({
-                 site:response.data().name,
-                 siteAddress:response.data().address,
-                 siteContact:response.data().contact,
-                 siteEmail:response.data().email
-                })
+            response.data().forEach(si => {
+                this.setState({
+                    site:si.name,
+                    siteAddress:si.address,
+                    siteContact:si.contact,
+                    siteEmail:si.email
+                   });
+            });
+    
 
          })
 
