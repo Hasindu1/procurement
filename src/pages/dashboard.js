@@ -22,7 +22,7 @@ export default function dashboard() {
                         <p class="card-text">You can go to the Supplier Section</p>
                         </div>
                 <div class="card-footer">
-                        <Link to={"/SupplierList"}>Go to </Link>
+                        <Link to={"/SupplierList"}><button className="btn btn-primary" >Go to</button> </Link>
                 </div>
         </div>
         <div class="card">
@@ -31,7 +31,7 @@ export default function dashboard() {
                         <p class="card-text">You can go to the Sites Section</p>
                         </div>
                 <div class="card-footer">
-                        .card footer
+                <Link to={"/SiteList"}><button className="btn btn-primary" >Go to</button> </Link>
                 </div>
         </div>
    
