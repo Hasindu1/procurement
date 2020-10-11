@@ -67,25 +67,30 @@ export default class Order extends Component {
                 supplier:res.data().supplier,
                 total:res.data().total,
                 unit:res.data().unit,
-                orderId:this.props.match.params.id
+                orderId:this.props.match.params.id,
+                remarks:res.data().remarks
             })
+
 
             firebase
             .firestore()
-            .collection('suppliers')
-            .where("name","==",res.data().supplier)
+            .collection('sites')
+            .where("name","==",res.data().site)
             .get()
-            .then(response => {
-                    response.data().forEach(sup => {
-                        this.setState({
-                            supplier:sup.name,
-                            supAddress:sup.address,
-                            supContact:sup.contact,
-                            supEmail:sup.email,
-                        });
-                    });
-
-        })
+            .then((response) => {
+               response.forEach((sup => {
+                    this.setState({
+                        supplier:sup.data().name,
+                        supAddress:sup.data().address,
+                        supContact:sup.data().contact,
+                        supEmail:sup.data().email
+                    })
+    
+               }))
+    
+          
+    
+               })
 
         
         firebase
@@ -93,21 +98,24 @@ export default class Order extends Component {
         .collection('sites')
         .where("name","==",res.data().site)
         .get()
-        .then(response => {
-            response.data().forEach(si => {
+        .then((response) => {
+           response.forEach((site => {
+         
                 this.setState({
-                    site:si.name,
-                    siteAddress:si.address,
-                    siteContact:si.contact,
-                    siteEmail:si.email
-                   });
-            });
-    
+                    site:site.data().name,
+                    siteAddress:site.data().address,
+                    siteContact:site.data().contact,
+                    siteEmail:site.data().email
+                })
 
+           }))
+
+      
+
+           })
          })
 
-       
-     })
+
 
 
 }
@@ -278,9 +286,9 @@ changeStatus(e) {
     
                     <div className="form-group">
                             <label>Remarks</label>
-                            <textarea id="w3review" name="w3review" rows="4" cols="50" className="form-control" value={this.state.remarks} onChange={this.onChangeRemarks}>
-                                {this.state.remarks}
-                            </textarea>
+                            <textarea id="w3review" name="w3review" rows="4" cols="50" className="form-control" value={this.state.remarks} onChange={this.onChangeRemarks} />
+
+                            
                      </div>
     
     

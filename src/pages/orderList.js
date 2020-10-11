@@ -12,7 +12,7 @@ function usePendingOrders(){
             .firestore()
             .collection('orders')
             .where('draft','==',false)
-            .where('status','==',["pending","Sent To Reference"])
+            .where('status','==',["Pending","Sent To Reference"])
             .onSnapshot((snapshot) => {
                 const newOrders = snapshot.docs.map((doc) => ({
                     id: doc.id,
@@ -38,7 +38,7 @@ function ApprovedOrders(){
             .firestore()
             .collection('orders')
             .where('draft','==',false)
-            .where('status','==','approved')
+            .where('status','==','Approved')
             .onSnapshot((snapshot) => {
                 const newOrders = snapshot.docs.map((doc) => ({
                     id: doc.id,
