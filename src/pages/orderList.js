@@ -63,7 +63,7 @@ function useDeclinedOrders(){
             .firestore()
             .collection('orders')
             .where('draft','==',false)
-            .where('status','==','declined')
+            .where('status','==','Rejected')
             .onSnapshot((snapshot) => {
                 const newOrders = snapshot.docs.map((doc) => ({
                     id: doc.id,
