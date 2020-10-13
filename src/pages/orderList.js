@@ -171,7 +171,7 @@ const OrderList = () =>{
                      </Link> 
                 )}
             </ul>
-            <hr/>   
+           
             <ul className="list-group my-5">
                 
                 <h3><u>Orders which are sent to Reference</u></h3>
@@ -191,7 +191,7 @@ const OrderList = () =>{
                         )}
                     </ul>
 
-                    <hr/>
+            
 
               <ul className="list-group my-5">
                 
@@ -212,7 +212,7 @@ const OrderList = () =>{
                         )}
                     </ul>
 
-            <hr/>
+        
 
             <ul className="list-group my-5">
         <h3><u>Approved Orders</u></h3>
@@ -231,7 +231,7 @@ const OrderList = () =>{
                      </Link> 
                 )}
             </ul>
-            <hr/>
+        
 
             <ul className="list-group my-5">
               

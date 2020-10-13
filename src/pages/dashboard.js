@@ -27,6 +27,15 @@ export default function dashboard() {
         </div>
         <div class="card">
                 <div class="card-body">
+                        <h4 class="card-title">Items</h4>
+                        <p class="card-text">You can go to the Item Section</p>
+                        </div>
+                <div class="card-footer">
+                        <Link to={"/ItemList"}><button className="btn btn-primary" >Go to</button> </Link>
+                </div>
+        </div>
+        <div class="card">
+                <div class="card-body">
                         <h4 class="card-title">Sites</h4>
                         <p class="card-text">You can go to the Sites Section</p>
                         </div>
