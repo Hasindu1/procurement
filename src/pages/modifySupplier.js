@@ -12,6 +12,7 @@ export default class ModifySupplier extends Component {
         this.onChangeContact = this.onChangeContact.bind(this);
         this.onChangeAddress = this.onChangeAddress.bind(this);
         this.onChangeEmail = this.onChangeEmail.bind(this);
+        this.onChangeSiteName = this.onChangeSiteName.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
 
         this.state = {
@@ -20,7 +21,9 @@ export default class ModifySupplier extends Component {
             contact:'',
             address:'',
             email:'',
-            supId:''
+            supId:'',
+            siteName:'',
+            sites:[]
 
         };
     }
@@ -44,7 +47,19 @@ export default class ModifySupplier extends Component {
 
          })
 
-
+         firebase
+        .firestore()
+        .collection('sites')
+        .onSnapshot(snapshot => {
+            this.setState({
+                sites:snapshot.docs.map((doc) => ({
+                    id: doc.id,
+                    ...doc.data()
+                }))
+            })
+        
+        })
+       
 }
 
 onChangeName(e){
@@ -70,6 +85,12 @@ onChangeAddress(e){
 onChangeEmail(e){
     this.setState({
         email:e.target.value
+    })
+}
+
+onChangeSiteName(e){
+    this.setState({
+        siteName:e.target.value
     })
 }
 
@@ -119,7 +140,7 @@ onSubmit(e){
     
                     <div className="form-group">
                             <label> Supplier Name :</label>
-                            <input type="text" className="form-control" value={this.state.name} onChange={this.onChangeName}/>
+                            <input type="text" className="form-control" value={this.state.name} onChange={this.onChangeName} readOnly/>
                     </div>
     
                     <div className="form-group">
@@ -157,9 +178,45 @@ onSubmit(e){
     
                 </form>
     
-               
+                <hr/>
+
+                <h3>Site details</h3>
+
+            <form>
+                <div className="form-group">
+                             <label> Site Name</label>
+                            <select ref = "siteInput" className="form-control" value={this.state.siteName} onChange={this.onChangeSiteName}>
+                                {
+                                        this.state.sites.map(function(site){
+                                            return <option key={site.name} value={site.name}>{site.name}</option>
+                                        })
+                                }
+                            </select>
+                    </div>
+                    <center>
+                    <div className="form-group">
+                        <button type="submit" className="btn btn-primary" >Submit Depot </button> &nbsp;
+                     
+                    </div>
+                    </center>
+
+            </form>
+
+                <div class="card">
+                <div class="card-header">
+                        <h4 class="card-title">Site List</h4>
+                </div>
+                <div class="card-body">
+
+                         <ul>
+                             <li> <h6>Site 1</h6></li>
+                             <li><h6>Site 2</h6></li>
+                        </ul>
+                </div>
                </div>
-    
+
+
+            </div>
             </>
           
         )

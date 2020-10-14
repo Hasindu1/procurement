@@ -1,9 +1,6 @@
 import React from 'react'
 
 // components
-import Header from '../components/main/header'
-import Menu from '../components/main/menu'
-import Contact from '../components/main/contact'
 import NavBar from '../components/navbar'
 import { Link } from 'react-router-dom'
 
@@ -43,9 +40,6 @@ export default function dashboard() {
                 <Link to={"/SiteList"}><button className="btn btn-primary" >Go to</button> </Link>
                 </div>
         </div>
-   
-          
-
         </div>
 
        </>
