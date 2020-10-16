@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
-import {getSite , updateSite} from '../../../Services/siteServices'
+import {getSite , updateSite , addSupplier} from '../../../Services/siteServices'
+import {getAllSuppliers,getSuppliersBySiteName} from '../../../Services/supplierService'
 
 
 export default class ModifySite extends Component {
@@ -12,7 +13,9 @@ export default class ModifySite extends Component {
         this.onChangeContact = this.onChangeContact.bind(this);
         this.onChangeAddress = this.onChangeAddress.bind(this);
         this.onChangeEmail = this.onChangeEmail.bind(this);
+        this.onChangeSupplierName = this.onChangeSupplierName.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
+        this.onSubmitSuppliers = this.onSubmitSuppliers.bind(this);
 
         this.state = {
             //site Properties
@@ -20,7 +23,10 @@ export default class ModifySite extends Component {
             contact:'',
             address:'',
             email:'',
-            siteId:''
+            siteId:'',
+            supplierName:'',
+            suppliers:[],
+            selectedSuppliers:[]
 
         };
     }
@@ -38,8 +44,30 @@ export default class ModifySite extends Component {
                 siteId:this.props.match.params.id
             })
 
-
+            getSuppliersBySiteName(res.data().name)
+            .onSnapshot(snapshot => {
+                this.setState({
+                    selectedSuppliers:snapshot.docs.map((doc) => ({
+                        id: doc.id,
+                        ...doc.data()
+                    }))
+                })
+            
+            })
          })
+
+         getAllSuppliers()
+          .onSnapshot(snapshot => {
+            this.setState({
+                suppliers:snapshot.docs.map((doc) => ({
+                    id: doc.id,
+                    ...doc.data()
+                }))
+            })
+        
+        })
+
+
 
 
 }
@@ -70,6 +98,12 @@ onChangeEmail(e){
     })
 }
 
+onChangeSupplierName(e){
+
+    this.setState({
+        supplierName:e.target.value
+    })
+}
 
 onSubmit(e){
     e.preventDefault();
@@ -88,7 +122,29 @@ onSubmit(e){
 
 }
 
+onSubmitSuppliers(e){
+    e.preventDefault();
 
+    const Supplier = {
+        site:this.state.name,
+        supplier:this.state.supplierName, 
+    }
+
+    addSupplier(Supplier)
+    .then( 
+
+        getSuppliersBySiteName(this.state.name)
+        .onSnapshot(snapshot => {
+            this.setState({
+                selectedSuppliers:snapshot.docs.map((doc) => ({
+                    id: doc.id,
+                    ...doc.data()
+                }))
+            })
+        
+        })
+    )
+}
 
     render() {
         return (
@@ -154,6 +210,44 @@ onSubmit(e){
     
                 </form>
     
+                <h3>Supplier details</h3>
+
+              <form onSubmit = {this.onSubmitSuppliers}>
+                <div className="form-group">
+                             <label> Supplier Name</label>
+                            <select ref = "supplierInput" className="form-control" value={this.state.supplierName} onChange={this.onChangeSupplierName}>
+                                {
+                                        this.state.suppliers.map(function(supplier){
+                                            return <option key={supplier.name} value={supplier.name}>{supplier.name}</option>
+                                        })
+                                }
+                            </select>
+                    </div>
+                    <center>
+                    <div className="form-group">
+                        <button type="submit" className="btn btn-primary" >Add Supplier</button> &nbsp;
+                     
+                    </div>
+                    </center>
+
+            </form>
+
+                <div class="card">
+                <div class="card-header">
+                        <h4 class="card-title">Supplier List</h4>
+                </div>
+                <div class="card-body">
+                <ul>
+                {this.state.selectedSuppliers.map(function(supplier){
+
+                    return <li><h6> {supplier.supplier}</h6></li>
+    
+                })
+            }
+                </ul>
+                </div>
+               </div>
+
                
                </div>
     

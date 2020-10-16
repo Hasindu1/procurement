@@ -73,3 +73,14 @@ export const getSitesBySupplierName = (name) =>{
     .collection(MyConstClass.Site_Supplier_Table)
     .where(MyConstClass.Supplier , '==' ,name)
 }
+
+//add site for a given supplier
+export const addSupplier = (Supplier) => {
+    return firebase
+    .firestore()
+    .collection(MyConstClass.Site_Supplier_Table)
+     .add({
+        site:Supplier.site,
+        supplier:Supplier.supplier,     
+     })
+}

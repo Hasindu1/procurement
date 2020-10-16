@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import firebase from '../../../Firebase'
 import { Link } from 'react-router-dom'
-import {getSupplier,UpdateSupplier} from "../../../Services/supplierService"
+import {getSupplier,UpdateSupplier,addSite} from "../../../Services/supplierService"
 import {getSites,getSitesBySupplierName} from "../../../Services/siteServices"
 
 
@@ -73,11 +73,6 @@ export default class ModifySupplier extends Component {
         
         })
 
-     
-    
-
-        console.log(this.state.sites)
-        console.log(this.state.selectedSites)
 
        
        
@@ -134,13 +129,12 @@ onSubmitSites(e){
 
     e.preventDefault();
 
-    firebase
-    .firestore()
-    .collection('sitesOfSupplier')
-    .add({
+    const Site = {
         site:this.state.siteName,
-        supplier:this.state.name,   
-    })
+        supplier:this.state.name, 
+    }
+
+    addSite(Site)
     .then( 
 
         getSitesBySupplierName(this.state.name)
