@@ -5,6 +5,9 @@ export const Site_Table = "sites"
 export const Order_Table = "orders"
 export const Site_Supplier_Table = "sitesOfSupplier"
 export const Policy_Table = "policies"
+export const Delivery_Table = "Delivery"
+export const Payment_Table = "Payment"
+export const Account_Table = "Account"
 
 //attributes of order collection
 export const IsDraft = "draft"
