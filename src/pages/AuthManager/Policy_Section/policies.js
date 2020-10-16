@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import firebase from '../../../Firebase'
 import {Link} from 'react-router-dom'
+import {getApprovalLimits,setStaffAprovalLimit,setSiteManagerAprovalLimit} from '../../../Services/policyService'
+
 
 
 
@@ -10,10 +12,11 @@ export default class NewPolicy extends Component {
         super(props);
 
         this.onChangeStaffApproveLimit = this.onChangeStaffApproveLimit.bind(this);
-        this.onChangeSiteManagerApproveLimit = this.onChangeStaffApproveLimit.bind(this);
+        this.onChangeSiteManagerApproveLimit = this.onChangeSiteManagerApproveLimit.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
 
         this.state = {
+
             //site Properties
             staffApproveLimit:0,
             siteManagerApproveLimit:0,
@@ -21,7 +24,18 @@ export default class NewPolicy extends Component {
         };
     }
 
+
+    componentDidMount(){
+
+        getApprovalLimits()
+        .then(res => {
+            this.setState({
+                    staffApproveLimit:res.data().staffApproveLimit,
+                    siteManagerApproveLimit:res.data().siteManagerApproveLimit
+            })
+    })
   
+}
 
     onChangeStaffApproveLimit(e){
     this.setState({
@@ -39,20 +53,12 @@ export default class NewPolicy extends Component {
 
 
 onSubmit(e){
+
     e.preventDefault();
 
-    firebase
-    .firestore()
-    .collection('policies')
-    .doc('fVr0ac5nhXlF78cizaMk')
-    .set({
-        staffApproveLimit:this.state.staffApproveLimit,
-        siteManagerApproveLimit:this.state.siteManagerApproveLimit,
-        
-    })
+    setStaffAprovalLimit(this.state.staffApproveLimit);
+    setSiteManagerAprovalLimit(this.state.siteManagerApproveLimit)
 
-   
-    
 
 }
 

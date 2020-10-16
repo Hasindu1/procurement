@@ -22,6 +22,7 @@ import modifySite from "./pages/ProcurmentStaff/Site_Section/modifySite"
 import modifyItem from "./pages/ProcurmentStaff/Item_Section/modifyItem"
 import ItemList from "./pages/ProcurmentStaff/Item_Section/itemList"
 import newItem from "./pages/ProcurmentStaff/Item_Section/newItem"
+import policy from "./pages/AuthManager/Policy_Section/policies"
 
 export default function App() {
   return (
@@ -44,6 +45,7 @@ export default function App() {
   <Route path="/ItemList" component={ItemList}/>
   <Route path="/newItem" component={newItem}/>
   <Route path="/modifyItem:id" component={modifyItem}/>
+  <Route path="/policy" component={policy}/>
   </div>
   </Router>
   )

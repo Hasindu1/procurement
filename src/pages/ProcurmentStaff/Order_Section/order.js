@@ -3,6 +3,7 @@ import NavBar from '../../../components/main/Navigation_Bar/navbar'
 import {getOrder,Approve,PartiallyApprove,Decline,sendToReference,SetRemarks} from '../../../Services/orderServices'
 import {getSupplierByName} from '../../../Services/supplierService'
 import {getSiteByName} from '../../../Services/siteServices'
+import {getApprovalLimits} from '../../../Services/policyService'
 import * as MyConstClass from '../../../Constant/Constants'
 
 
@@ -44,8 +45,11 @@ export default class Order extends Component {
             site:'',
             siteAddress:'',
             siteContact:'',
-            siteEmail:''
+            siteEmail:'',
 
+            //Approval Limits
+            siteManagerApprovalLimit:0,
+            staffApprovalLimit:0,
 
 
 
@@ -108,7 +112,13 @@ export default class Order extends Component {
          })
 
 
-
+         getApprovalLimits()
+         .then(res => {
+            this.setState({
+                    staffApprovalLimit:res.data().staffApproveLimit,
+                    siteManagerApprovalLimit:res.data().siteManagerApproveLimit
+            })
+         })
 
 }
 
@@ -270,10 +280,10 @@ changeStatus(e) {
                     
                     <center>
                     <div className="form-group">
-                        <button type="submit" className="btn btn-success" value={MyConstClass.Approved} onClick={this.changeStatus} disabled={this.state.total >= 1000000 }> Approve </button> &nbsp;
-                        <button type="submit" className="btn btn-warning" value={MyConstClass.Partially_Approved} onClick={this.changeStatus} disabled={this.state.total >= 1000000 }> Partially Approve</button> &nbsp;
+                        <button type="submit" className="btn btn-success" value={MyConstClass.Approved} onClick={this.changeStatus} disabled={this.state.total >= this.state.staffApprovalLimit }> Approve </button> &nbsp;
+                        <button type="submit" className="btn btn-warning" value={MyConstClass.Partially_Approved} onClick={this.changeStatus} disabled={this.state.total >= this.state.staffApprovalLimit }> Partially Approve</button> &nbsp;
                         <button type="submit" className="btn btn-primary" value={MyConstClass.Sent_To_Reference} onClick={this.changeStatus}> Reffered </button> &nbsp;
-                        <button type="submit" className="btn btn-danger" value={MyConstClass.Declined} onClick={this.changeStatus} disabled={this.state.total >= 1000000 }> Decline </button> &nbsp;
+                        <button type="submit" className="btn btn-danger" value={MyConstClass.Declined} onClick={this.changeStatus} disabled={this.state.total >= this.state.staffApprovalLimit }> Decline </button> &nbsp;
                     </div>
                     </center>
     
