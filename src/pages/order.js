@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import NavBar from '../components/navbar'
 import firebase from '../Firebase'
+import {getOrders} from '../Services/orderServices'
 
 
 
@@ -14,18 +15,21 @@ export default class Order extends Component {
         this.onSubmit = this.onSubmit.bind(this);
 
         this.state = {
+
             //Order Properties
+
+            orderId:'', //primary key   
             comment:'',
-            date:'',
+            date:new Date(),
             description:'',
-            draft:'',
+            draft:false,
             product:'',
             quantity:0,
             status:'',
-            total:0,
-            unit:0,
+            total:0.0,
+            unit:0.0,
             remarks:'',
-            orderId:'',
+           
 
             //Supplier Properties
             suppliers:[],
@@ -49,11 +53,7 @@ export default class Order extends Component {
 
     componentDidMount(){
         
-        firebase
-        .firestore()
-        .collection('orders')
-        .doc(this.props.match.params.id)
-        .get()
+        getOrders(this.props.match.params.id)
         .then(res => {
             this.setState({
                 Order: res.data(),
@@ -69,7 +69,7 @@ export default class Order extends Component {
                 unit:res.data().unit,
                 orderId:this.props.match.params.id,
                 remarks:res.data().remarks
-            })
+        })
 
 
             firebase

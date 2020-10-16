@@ -1,6 +1,9 @@
 import React, { Component } from 'react'
 import firebase from '../Firebase'
 import { Link } from 'react-router-dom'
+import Sites from "./supplierSitesList" 
+import {getSupplier,UpdateSupplier} from "../Services/supplierService"
+import {getSites} from "../Services/siteServices"
 
 
 export default class ModifySupplier extends Component {
@@ -13,7 +16,9 @@ export default class ModifySupplier extends Component {
         this.onChangeAddress = this.onChangeAddress.bind(this);
         this.onChangeEmail = this.onChangeEmail.bind(this);
         this.onChangeSiteName = this.onChangeSiteName.bind(this);
+
         this.onSubmit = this.onSubmit.bind(this);
+        this.onSubmitSites = this.onSubmitSites.bind(this);
 
         this.state = {
             //supplier Properties
@@ -23,18 +28,16 @@ export default class ModifySupplier extends Component {
             email:'',
             supId:'',
             siteName:'',
-            sites:[]
+            sites:[],
+            selectedSites:[]
 
         };
     }
 
     componentDidMount(){
         
-        firebase
-        .firestore()
-        .collection('suppliers')
-        .doc(this.props.match.params.id)
-        .get()
+        //Retreiving the supplier details
+        getSupplier(this.props.match.params.id)
         .then(res => {
             this.setState({
                 name:res.data().name,
@@ -47,9 +50,8 @@ export default class ModifySupplier extends Component {
 
          })
 
-         firebase
-        .firestore()
-        .collection('sites')
+         //Retreiving the sites
+         getSites()
         .onSnapshot(snapshot => {
             this.setState({
                 sites:snapshot.docs.map((doc) => ({
@@ -59,6 +61,22 @@ export default class ModifySupplier extends Component {
             })
         
         })
+
+       firebase
+        .firestore()
+        .collection('sitesOfSupplier')
+        .where('supplier','==',this.state.name)
+        .onSnapshot(snapshot => {
+            this.setState({
+                selectedSites:snapshot.docs.map((doc) => ({
+                    id: doc.id,
+                    ...doc.data()
+                }))
+            })
+        
+        })
+
+       
        
 }
 
@@ -98,20 +116,29 @@ onChangeSiteName(e){
 onSubmit(e){
     e.preventDefault();
 
-
-    firebase
-    .firestore()
-    .collection('suppliers')
-    .doc(this.props.match.params.id)
-    .set({
+    const Supplier = {
         name:this.state.name,
         address:this.state.address,
         contact:this.state.contact,
         email:this.state.email,
-       
+    }
+
+    //Update Supplier
+    UpdateSupplier(this.props.match.params.id,Supplier)
+}
+
+onSubmitSites(e){
+
+    e.preventDefault();
+
+    firebase
+    .firestore()
+    .collection('sitesOfSupplier')
+    .add({
+        site:this.state.siteName,
+        supplier:this.state.name,   
     })
     
-
 }
 
 
@@ -182,7 +209,7 @@ onSubmit(e){
 
                 <h3>Site details</h3>
 
-            <form>
+            <form onSubmit = {this.onSubmitSites}>
                 <div className="form-group">
                              <label> Site Name</label>
                             <select ref = "siteInput" className="form-control" value={this.state.siteName} onChange={this.onChangeSiteName}>
@@ -207,11 +234,7 @@ onSubmit(e){
                         <h4 class="card-title">Site List</h4>
                 </div>
                 <div class="card-body">
-
-                         <ul>
-                             <li> <h6>Site 1</h6></li>
-                             <li><h6>Site 2</h6></li>
-                        </ul>
+                {/* <Sites supplierName={this.state.name}/> */}
                 </div>
                </div>
 

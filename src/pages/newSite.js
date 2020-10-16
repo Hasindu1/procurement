@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import firebase from '../Firebase'
 import {Link} from 'react-router-dom'
+import {addNewSite} from '../Services/siteServices'
 
 
 
@@ -57,16 +58,14 @@ onChangeEmail(e){
 onSubmit(e){
     e.preventDefault();
 
-    firebase
-    .firestore()
-    .collection('sites')
-    .add({
+    const NewSite = {
         address:this.state.address,
         contact:this.state.contact,
         email:this.state.email,
         name:this.state.name,
-        
-    })
+    }
+
+    addNewSite(NewSite);
 
    
     

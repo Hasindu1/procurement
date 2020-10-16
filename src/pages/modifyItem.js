@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import firebase from '../Firebase'
 import { Link } from 'react-router-dom'
+import {getitem , updateItem} from '../Services/itemService'
 
 
 export default class ModifyItem extends Component {
@@ -21,11 +22,7 @@ export default class ModifyItem extends Component {
 
     componentDidMount(){
         
-        firebase
-        .firestore()
-        .collection('items')
-        .doc(this.props.match.params.id)
-        .get()
+        getitem(this.props.match.params.id)
         .then(res => {
             this.setState({
                 name:res.data().name,
@@ -55,18 +52,13 @@ onChangeName(e){
 onSubmit(e){
     e.preventDefault();
 
-
-    firebase
-    .firestore()
-    .collection('items')
-    .doc(this.props.match.params.id)
-    .set({
+    const Item ={
         name:this.state.name,
         unit_price:this.state.unitPrice
-       
-    })
-    
+    }
 
+    updateItem(this.props.match.params.id , Item);
+ 
 }
 
 
@@ -112,7 +104,6 @@ onSubmit(e){
                         <button type="submit" className="btn btn-default" > Update </button> &nbsp;
                         <Link to={"/ItemList"}><button type="submit" className="btn btn-primary" >Go back</button> &nbsp;</Link>
 
-                        
                     </div>
                     </center>
     

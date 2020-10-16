@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import firebase from '../Firebase'
 import {Link} from 'react-router-dom'
+import {AddNewItem} from '../Services/itemService'
 
 
 
@@ -40,16 +41,15 @@ export default class NewItem extends Component {
 
 
 onSubmit(e){
+    
     e.preventDefault();
 
-    firebase
-    .firestore()
-    .collection('items')
-    .add({
+    const Item ={
         name:this.state.name,
-        unit_price:this.state.unitPrice,
-        
-    })
+        unit_price:this.state.unitPrice
+    }
+
+    AddNewItem(Item);
 
    
     

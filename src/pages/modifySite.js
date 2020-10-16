@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import firebase from '../Firebase'
 import { Link } from 'react-router-dom'
+import {getSite , updateSite} from '../Services/siteServices'
 
 
 export default class ModifySite extends Component {
@@ -27,11 +27,8 @@ export default class ModifySite extends Component {
 
     componentDidMount(){
         
-        firebase
-        .firestore()
-        .collection('sites')
-        .doc(this.props.match.params.id)
-        .get()
+       
+        getSite(this.props.match.params.id)
         .then(res => {
             this.setState({
                 name:res.data().name,
@@ -77,18 +74,16 @@ onChangeEmail(e){
 onSubmit(e){
     e.preventDefault();
 
-
-    firebase
-    .firestore()
-    .collection('sites')
-    .doc(this.props.match.params.id)
-    .set({
-        name:this.state.name,
+    const NewSite = {
         address:this.state.address,
         contact:this.state.contact,
         email:this.state.email,
-       
-    })
+        name:this.state.name,
+    }
+
+
+    updateSite(this.props.match.params.id,NewSite);
+
     
 
 }

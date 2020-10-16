@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import firebase from '../Firebase'
 import {Link} from 'react-router-dom'
+import {AddNewSupplier} from '../Services/supplierService'
 
 
 
@@ -16,7 +16,7 @@ export default class NewSupplier extends Component {
         this.onSubmit = this.onSubmit.bind(this);
 
         this.state = {
-            //supplier Properties
+            //Supplier Attributes
             name:'',
             contact:'',
             address:'',
@@ -57,17 +57,15 @@ onChangeEmail(e){
 onSubmit(e){
     e.preventDefault();
 
-    firebase
-    .firestore()
-    .collection('suppliers')
-    .add({
+    const Supplier = {
         address:this.state.address,
         availability:"test",
         contact:this.state.contact,
         email:this.state.email,
         name:this.state.name,
-        
-    })
+    }
+
+    AddNewSupplier(Supplier);
     
 
 }
@@ -105,15 +103,15 @@ onSubmit(e){
                     <div className="form-group">
        
                              <label> Email:</label>
-                            <span><input type="email" className="form-control" value={this.state.email} onChange={this.onChangeContact}/></span>    
+                            <span><input type="email" className="form-control" value={this.state.email} onChange={this.onChangeEmail}/></span>    
        
                     </div>
     
                     <div className="form-group">
                              <label> Contact No</label>
-                            <input type="tel" className="form-control" value={this.state.contact} onChange={this.onChangeEmail}/>
+                            <input type="tel" className="form-control" value={this.state.contact} onChange={this.onChangeContact}/>
                     </div>
-    
+                    
     
                     
     
