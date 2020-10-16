@@ -35,3 +35,12 @@ export const AddNewItem = (Item) => {
         unit_price:Item.unit_price
     })
 }
+
+//get all the  Items
+export const getItems = () => {
+
+   return firebase
+    .firestore()
+    .collection('items')
+
+}

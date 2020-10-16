@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import NavBar from '../components/navbar'
-import firebase from '../Firebase'
-import {getOrders , Approve , PartiallyApprove ,Decline , sendToReference ,SetRemarks} from '../Services/orderServices'
+import {getOrder,Approve,PartiallyApprove,Decline,sendToReference,SetRemarks} from '../Services/orderServices'
+import {getSupplierByName} from '../Services/supplierService'
+import {getSiteByName} from '../Services/siteServices'
 
 
 
@@ -53,7 +54,7 @@ export default class Order extends Component {
 
     componentDidMount(){
         
-        getOrders(this.props.match.params.id)
+        getOrder(this.props.match.params.id)
         .then(res => {
             this.setState({
                 comment:res.data().comment,
@@ -71,11 +72,7 @@ export default class Order extends Component {
         })
 
 
-            firebase
-            .firestore()
-            .collection('suppliers')
-            .where("name","==",res.data().supplier)
-            .get()
+            getSupplierByName(res.data().supplier)
             .then((response) => {
                response.forEach((sup => {
                     this.setState({
@@ -92,11 +89,7 @@ export default class Order extends Component {
                })
 
         
-        firebase
-        .firestore()
-        .collection('sites')
-        .where("name","==",res.data().site)
-        .get()
+        getSiteByName(res.data().site)
         .then((response) => {
            response.forEach((site => {
          

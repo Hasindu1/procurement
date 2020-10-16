@@ -1,6 +1,11 @@
 import React, { Component } from 'react'
 import AuthManagerNavBar from '../components/main/authManagerNavBar'
 import firebase from '../Firebase'
+import {getOrder,Approve,PartiallyApprove,Decline,SetRemarks} from '../Services/orderServices'
+import {getSupplierByName} from '../Services/supplierService'
+import {getSiteByName} from '../Services/siteServices'
+
+
 
 
 
@@ -22,8 +27,8 @@ export default class AuthManagerOrder extends Component {
             product:'',
             quantity:0,
             status:'',
-            total:0,
-            unit:0,
+            total:0.0,
+            unit:0.0,
             remarks:'',
             orderId:'',
 
@@ -47,11 +52,7 @@ export default class AuthManagerOrder extends Component {
 
     componentDidMount(){
         
-        firebase
-        .firestore()
-        .collection('orders')
-        .doc(this.props.match.params.id)
-        .get()
+        getOrder(this.props.match.params.id)
         .then(res => {
             this.setState({
                 Order: res.data(),
@@ -68,36 +69,37 @@ export default class AuthManagerOrder extends Component {
                 orderId:this.props.match.params.id
             })
 
-            firebase
-            .firestore()
-            .collection('suppliers')
-            .doc("XJqlIZ8wRVkSdV8y6Y4H")
-            .get()
-            .then(response => {
-             this.setState({
-                     supplier:response.data().name,
-                     supAddress:response.data().address,
-                     supContact:response.data().contact,
-                     supEmail:response.data().email
+            getSupplierByName(res.data().supplier)
+            .then((response) => {
+               response.forEach((sup => {
+                    this.setState({
+                        supplier:sup.data().name,
+                        supAddress:sup.data().address,
+                        supContact:sup.data().contact,
+                        supEmail:sup.data().email
+                    })
+    
+               }))
+
             })
 
-        })
+            getSiteByName(res.data().site)
+            .then((response) => {
+               response.forEach((site => {
+             
+                    this.setState({
+                        site:site.data().name,
+                        siteAddress:site.data().address,
+                        siteContact:site.data().contact,
+                        siteEmail:site.data().email
+                    })
+    
+               }))
+    
+          
+    
+               })
 
-        
-        firebase
-        .firestore()
-        .collection('sites')
-        .doc("6WQFswR1LTvKTsGj0Xls")
-        .get()
-        .then(response => {
-         this.setState({
-                 site:response.data().name,
-                 siteAddress:response.data().address,
-                 siteContact:response.data().contact,
-                 siteEmail:response.data().email
-                })
-
-         })
 
        
      })
@@ -115,25 +117,27 @@ onSubmit(e){
 
     e.preventDefault();
 
+    e.preventDefault();
 
-    firebase
-    .firestore()
-    .collection('orders')
-    .doc(this.props.match.params.id)
-    .set({
-        comment:this.state.comment,
-        date:this.state.date,
-        description:this.state.description,
-        draft:this.state.draft,
-        product:this.state.product,
-        quantity:this.state.quantity,
-        site:this.state.site,
-        status:this.state.status,
-        supplier:this.state.supplier,
-        total:this.state.total,
-        unit:this.state.unit,
-        remarks: this.state.remarks
-    })
+    /**
+     * Conditionally calling the set status methods
+     */
+
+    if(this.state.status == "Approved"){
+        Approve(this.props.match.params.id);
+    }
+
+    else if(this.state.status == "Rejected"){
+        Decline(this.props.match.params.id);
+    }
+    
+    else if(this.state.status == "partially approved"){
+        PartiallyApprove(this.props.match.params.id);
+    }
+
+
+    //set the Order Remark
+    SetRemarks(this.props.match.params.id,this.state.remarks);
     
 
 }
@@ -260,9 +264,9 @@ changeStatus(e) {
                     
                     <center>
                     <div className="form-group">
-                        <button type="submit" className="btn btn-success" value="approved" onClick={this.changeStatus}> Approve </button> &nbsp;
+                        <button type="submit" className="btn btn-success" value="Approved" onClick={this.changeStatus}> Approve </button> &nbsp;
                         <button type="submit" className="btn btn-warning" value="partially approved" onClick={this.changeStatus}> Partially Approve</button> &nbsp;
-                        <button type="submit" className="btn btn-danger" value="declined" onClick={this.changeStatus}> Decline </button> &nbsp;
+                        <button type="submit" className="btn btn-danger" value="Rejected" onClick={this.changeStatus}> Decline </button> &nbsp;
 
                     </div>
                     </center>

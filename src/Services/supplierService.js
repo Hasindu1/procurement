@@ -44,3 +44,14 @@ export const AddNewSupplier = (Supplier) => {
     })
     
 }
+
+//get Supplier by name 
+export const getSupplierByName = (name) => {
+
+    return    firebase
+    .firestore()
+    .collection('suppliers')
+    .where("name","==",name)
+    .get()
+
+} 

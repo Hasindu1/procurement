@@ -1,7 +1,8 @@
 import firebase from '../Firebase'
 
+
 //Get order by id
-export const getOrders = (id) => {
+export const getOrder = (id) => {
 
     return   firebase
     .firestore()

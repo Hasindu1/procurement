@@ -6,7 +6,7 @@ export const getSites = () => {
     return firebase
     .firestore()
     .collection('sites')
-
+    
 }
 
 //add new site
@@ -53,4 +53,14 @@ export const updateSite = (id ,Site) => {
 
 }
 
-    
+//get Site by Name
+export const getSiteByName = (name) => {
+
+    return  firebase
+    .firestore()
+    .collection('sites')
+    .where("name","==",name)
+    .get()
+
+}
+  

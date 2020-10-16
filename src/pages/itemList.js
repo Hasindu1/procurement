@@ -1,16 +1,14 @@
 import React, {useState,useEffect} from 'react'
 import NavBar from '../components/navbar'
-import firebase from '../Firebase'
 import { Link } from 'react-router-dom';
+import {getItems} from '../Services/itemService'
 
 
 function useItems(){
     const [items,setItems] = useState([])
 
     useEffect(() => {
-        const unsubscribe = firebase
-            .firestore()
-            .collection('items')
+        const unsubscribe = getItems()
             .onSnapshot((snapshot) => {
                 const newItems= snapshot.docs.map((doc) => ({
                     id: doc.id,
