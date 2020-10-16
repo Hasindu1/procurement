@@ -65,3 +65,11 @@ export const getSiteByName = (name) => {
 
 }
   
+
+//get List Of Sites by Supplier Name
+export const getSitesBySupplierName = (name) =>{
+    return firebase
+    .firestore()
+    .collection(MyConstClass.Site_Supplier_Table)
+    .where(MyConstClass.Supplier , '==' ,name)
+}

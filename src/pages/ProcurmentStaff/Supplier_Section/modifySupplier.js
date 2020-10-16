@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 import firebase from '../../../Firebase'
 import { Link } from 'react-router-dom'
-import Sites from "./supplierSitesList" 
 import {getSupplier,UpdateSupplier} from "../../../Services/supplierService"
-import {getSites} from "../../../Services/siteServices"
+import {getSites,getSitesBySupplierName} from "../../../Services/siteServices"
+
 
 
 export default class ModifySupplier extends Component {
@@ -47,6 +47,17 @@ export default class ModifySupplier extends Component {
                 supId:this.props.match.params.id
             })
 
+            //Retrieve Site List for this Supplier
+            getSitesBySupplierName(res.data().name)
+            .onSnapshot(snapshot => {
+                this.setState({
+                    selectedSites:snapshot.docs.map((doc) => ({
+                        id: doc.id,
+                        ...doc.data()
+                    }))
+                })
+            
+            })
 
          })
 
@@ -62,19 +73,11 @@ export default class ModifySupplier extends Component {
         
         })
 
-       firebase
-        .firestore()
-        .collection('sitesOfSupplier')
-        .where('supplier','==',this.state.name)
-        .onSnapshot(snapshot => {
-            this.setState({
-                selectedSites:snapshot.docs.map((doc) => ({
-                    id: doc.id,
-                    ...doc.data()
-                }))
-            })
-        
-        })
+     
+    
+
+        console.log(this.state.sites)
+        console.log(this.state.selectedSites)
 
        
        
@@ -138,7 +141,19 @@ onSubmitSites(e){
         site:this.state.siteName,
         supplier:this.state.name,   
     })
-    
+    .then( 
+
+        getSitesBySupplierName(this.state.name)
+        .onSnapshot(snapshot => {
+            this.setState({
+                selectedSites:snapshot.docs.map((doc) => ({
+                    id: doc.id,
+                    ...doc.data()
+                }))
+            })
+        
+        })
+    )
 }
 
 
@@ -234,7 +249,14 @@ onSubmitSites(e){
                         <h4 class="card-title">Site List</h4>
                 </div>
                 <div class="card-body">
-                {/* <Sites supplierName={this.state.name}/> */}
+                <ul>
+                {this.state.selectedSites.map(function(site){
+
+                    return <li><h6>Site Name : {site.site}</h6></li>
+    
+                })
+            }
+                </ul>
                 </div>
                </div>
 

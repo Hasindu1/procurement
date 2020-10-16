@@ -47,7 +47,7 @@ const SupplierList = () =>{
                         <li className="list-group-item text-capitalize d-flex justify-content-between my-2">
                         <ul>
                              <li> <h6>Supplier ID : {supplier.id}</h6></li>
-                             <li><h6>Supplier NAme      : {supplier.name}</h6></li>
+                             <li><h6>Supplier Name      : {supplier.name}</h6></li>
                         </ul>
                             
                         </li>

@@ -3,6 +3,7 @@ export const Supplier_Table = "suppliers"
 export const Item_Table = "items"
 export const Site_Table = "sites"
 export const Order_Table = "orders"
+export const Site_Supplier_Table = "sitesOfSupplier"
 
 //attributes of order collection
 export const IsDraft = "draft"
@@ -21,3 +22,7 @@ export const Site_Name = "name"
 
 //attribute
 export const Supplier_Name = "name"
+
+//attributes of sitesOfSupplier collection
+export const Site = "site"
+export const Supplier = "supplier"
