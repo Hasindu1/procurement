@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import NavBar from '../components/navbar'
 import firebase from '../Firebase'
-import {getOrders} from '../Services/orderServices'
+import {getOrders , Approve , PartiallyApprove ,Decline , sendToReference ,SetRemarks} from '../Services/orderServices'
 
 
 
@@ -56,7 +56,6 @@ export default class Order extends Component {
         getOrders(this.props.match.params.id)
         .then(res => {
             this.setState({
-                Order: res.data(),
                 comment:res.data().comment,
                 date:res.data().date,
                 description:res.data().description,
@@ -74,8 +73,8 @@ export default class Order extends Component {
 
             firebase
             .firestore()
-            .collection('sites')
-            .where("name","==",res.data().site)
+            .collection('suppliers')
+            .where("name","==",res.data().supplier)
             .get()
             .then((response) => {
                response.forEach((sup => {
@@ -130,27 +129,30 @@ onSubmit(e){
 
     e.preventDefault();
 
+    /**
+     * Conditionally calling the set status methods
+     */
 
-    firebase
-    .firestore()
-    .collection('orders')
-    .doc(this.props.match.params.id)
-    .set({
-        comment:this.state.comment,
-        date:this.state.date,
-        description:this.state.description,
-        draft:this.state.draft,
-        product:this.state.product,
-        quantity:this.state.quantity,
-        site:this.state.site,
-        status:this.state.status,
-        supplier:this.state.supplier,
-        total:this.state.total,
-        unit:this.state.unit,
-        remarks: this.state.remarks
-    })
+    if(this.state.status == "Approved"){
+        Approve(this.props.match.params.id);
+    }
+
+    else if(this.state.status == "Rejected"){
+        Decline(this.props.match.params.id);
+    }
+
+    else if(this.state.status == "Sent To Reference"){
+        sendToReference(this.props.match.params.id);
+    }
     
+    else if(this.state.status == "partially approved"){
+        PartiallyApprove(this.props.match.params.id);
+    }
 
+
+    //set the Order Remark
+    SetRemarks(this.props.match.params.id,this.state.remarks);
+    
 }
 
 changeStatus(e) {
@@ -279,8 +281,6 @@ changeStatus(e) {
                         <button type="submit" className="btn btn-warning" value="partially approved" onClick={this.changeStatus} disabled={this.state.total >= 1000000 }> Partially Approve</button> &nbsp;
                         <button type="submit" className="btn btn-primary" value="Sent To Reference" onClick={this.changeStatus}> Reffered </button> &nbsp;
                         <button type="submit" className="btn btn-danger" value="Rejected" onClick={this.changeStatus} disabled={this.state.total >= 1000000 }> Decline </button> &nbsp;
-
-                        
                     </div>
                     </center>
     

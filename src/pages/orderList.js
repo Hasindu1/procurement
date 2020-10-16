@@ -2,18 +2,15 @@ import React, {useState,useEffect} from 'react'
 import NavBar from '../components/navbar'
 import firebase from '../Firebase'
 import { Link } from 'react-router-dom'
+import {getPendingOrders , getApprovedOrders, getDeclinedOrders ,getSentToReferenceOrders , getPartiallyApprovedOrders , sendToReference} from '../Services/orderServices'
 
 
 function usePendingOrders(){
     const [pendingOrders,setPendingOrders] = useState([])
 
     useEffect(() => {
-        const unsubscribe = firebase
-            .firestore()
-            .collection('orders')
-            .where('draft','==',false)
-            .where('status','==',["Pending","Sent To Reference"])
-            .onSnapshot((snapshot) => {
+        const unsubscribe = getPendingOrders()
+                .onSnapshot((snapshot) => {
                 const newOrders = snapshot.docs.map((doc) => ({
                     id: doc.id,
                     ...doc.data()
@@ -34,11 +31,7 @@ function ApprovedOrders(){
 
 
     useEffect(() => {
-        const unsubscribe = firebase
-            .firestore()
-            .collection('orders')
-            .where('draft','==',false)
-            .where('status','==','Approved')
+        const unsubscribe = getApprovedOrders()
             .onSnapshot((snapshot) => {
                 const newOrders = snapshot.docs.map((doc) => ({
                     id: doc.id,
@@ -59,11 +52,7 @@ function useDeclinedOrders(){
     const [declinedOrders,setDeclinedOrders] = useState([])
 
     useEffect(() => {
-        const unsubscribe = firebase
-            .firestore()
-            .collection('orders')
-            .where('draft','==',false)
-            .where('status','==','Rejected')
+        const unsubscribe = getDeclinedOrders()
             .onSnapshot((snapshot) => {
                 const newOrders = snapshot.docs.map((doc) => ({
                     id: doc.id,
@@ -83,11 +72,7 @@ function useSentReferenceOrders(){
     const [sentReferenceOrders,setSentReferenceOrders] = useState([])
 
     useEffect(() => {
-        const unsubscribe = firebase
-            .firestore()
-            .collection('orders')
-            .where('draft','==',false)
-            .where('status','==',"Sent To Reference")
+        const unsubscribe = getSentToReferenceOrders()
             .onSnapshot((snapshot) => {
                 const newOrders = snapshot.docs.map((doc) => ({
                     id: doc.id,
@@ -107,11 +92,7 @@ function usePartiallyApproved(){
     const [partiallyApprovedOrders,setPartiallyApprovedOrders] = useState([])
 
     useEffect(() => {
-        const unsubscribe = firebase
-            .firestore()
-            .collection('orders')
-            .where('draft','==',false)
-            .where('status','==',"partially approved")
+        const unsubscribe = getPartiallyApprovedOrders()
             .onSnapshot((snapshot) => {
                 const newOrders = snapshot.docs.map((doc) => ({
                     id: doc.id,
@@ -129,15 +110,10 @@ function usePartiallyApproved(){
 
 function markedAsReffered(id){
 
-            firebase
-            .firestore()
-            .collection('orders')
-            .doc(id)
-            .update({
-                status:"Sent To Reference",
-            })
+    sendToReference(id);
     
 }
+
 
 const OrderList = () =>{
 
@@ -165,7 +141,7 @@ const OrderList = () =>{
                         </ul>
                             
                                 <div className="todo-icon">
-                                    <span className={order.total >=  1000000  && order.status == "pending" ? 'mx-2 text-primary' : 'mx-2 text-primary invisible'}><i className="fas fa-envelope" onClick={markedAsReffered.bind(null,order.id)}></i><i className="fas fa-share"></i></span>
+                                    <span className={order.total >=  1000000  && order.status == "Pending" ? 'mx-2 text-primary' : 'mx-2 text-primary invisible'}><i className="fas fa-envelope" onClick={markedAsReffered.bind(null,order.id)}></i><i className="fas fa-share"></i></span>
                                 </div>
                         </li>
                      </Link> 
