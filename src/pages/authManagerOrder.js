@@ -1,12 +1,9 @@
 import React, { Component } from 'react'
 import AuthManagerNavBar from '../components/main/authManagerNavBar'
-import firebase from '../Firebase'
 import {getOrder,Approve,PartiallyApprove,Decline,SetRemarks} from '../Services/orderServices'
 import {getSupplierByName} from '../Services/supplierService'
 import {getSiteByName} from '../Services/siteServices'
-
-
-
+import * as MyConstClass from '../Constant/Constants'
 
 
 export default class AuthManagerOrder extends Component {
@@ -123,15 +120,15 @@ onSubmit(e){
      * Conditionally calling the set status methods
      */
 
-    if(this.state.status == "Approved"){
+    if(this.state.status == MyConstClass.Approved){
         Approve(this.props.match.params.id);
     }
 
-    else if(this.state.status == "Rejected"){
+    else if(this.state.status == MyConstClass.Declined){
         Decline(this.props.match.params.id);
     }
     
-    else if(this.state.status == "partially approved"){
+    else if(this.state.status == MyConstClass.Partially_Approved){
         PartiallyApprove(this.props.match.params.id);
     }
 
@@ -264,9 +261,9 @@ changeStatus(e) {
                     
                     <center>
                     <div className="form-group">
-                        <button type="submit" className="btn btn-success" value="Approved" onClick={this.changeStatus}> Approve </button> &nbsp;
-                        <button type="submit" className="btn btn-warning" value="partially approved" onClick={this.changeStatus}> Partially Approve</button> &nbsp;
-                        <button type="submit" className="btn btn-danger" value="Rejected" onClick={this.changeStatus}> Decline </button> &nbsp;
+                        <button type="submit" className="btn btn-success" value={MyConstClass.Approved} onClick={this.changeStatus}> Approve </button> &nbsp;
+                        <button type="submit" className="btn btn-warning" value={MyConstClass.Partially_Approved} onClick={this.changeStatus}> Partially Approve</button> &nbsp;
+                        <button type="submit" className="btn btn-danger" value={MyConstClass.Declined} onClick={this.changeStatus}> Decline </button> &nbsp;
 
                     </div>
                     </center>

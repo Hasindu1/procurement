@@ -3,7 +3,7 @@ import NavBar from '../components/navbar'
 import {getOrder,Approve,PartiallyApprove,Decline,sendToReference,SetRemarks} from '../Services/orderServices'
 import {getSupplierByName} from '../Services/supplierService'
 import {getSiteByName} from '../Services/siteServices'
-
+import * as MyConstClass from '../Constant/Constants'
 
 
 export default class Order extends Component {
@@ -126,19 +126,19 @@ onSubmit(e){
      * Conditionally calling the set status methods
      */
 
-    if(this.state.status == "Approved"){
+    if(this.state.status == MyConstClass.Approved){
         Approve(this.props.match.params.id);
     }
 
-    else if(this.state.status == "Rejected"){
+    else if(this.state.status == MyConstClass.Declined){
         Decline(this.props.match.params.id);
     }
 
-    else if(this.state.status == "Sent To Reference"){
+    else if(this.state.status == MyConstClass.Sent_To_Reference){
         sendToReference(this.props.match.params.id);
     }
     
-    else if(this.state.status == "partially approved"){
+    else if(this.state.status == MyConstClass.Partially_Approved){
         PartiallyApprove(this.props.match.params.id);
     }
 
@@ -270,10 +270,10 @@ changeStatus(e) {
                     
                     <center>
                     <div className="form-group">
-                        <button type="submit" className="btn btn-success" value="Approved" onClick={this.changeStatus} disabled={this.state.total >= 1000000 }> Approve </button> &nbsp;
-                        <button type="submit" className="btn btn-warning" value="partially approved" onClick={this.changeStatus} disabled={this.state.total >= 1000000 }> Partially Approve</button> &nbsp;
-                        <button type="submit" className="btn btn-primary" value="Sent To Reference" onClick={this.changeStatus}> Reffered </button> &nbsp;
-                        <button type="submit" className="btn btn-danger" value="Rejected" onClick={this.changeStatus} disabled={this.state.total >= 1000000 }> Decline </button> &nbsp;
+                        <button type="submit" className="btn btn-success" value={MyConstClass.Approved} onClick={this.changeStatus} disabled={this.state.total >= 1000000 }> Approve </button> &nbsp;
+                        <button type="submit" className="btn btn-warning" value={MyConstClass.Partially_Approved} onClick={this.changeStatus} disabled={this.state.total >= 1000000 }> Partially Approve</button> &nbsp;
+                        <button type="submit" className="btn btn-primary" value={MyConstClass.Sent_To_Reference} onClick={this.changeStatus}> Reffered </button> &nbsp;
+                        <button type="submit" className="btn btn-danger" value={MyConstClass.Declined} onClick={this.changeStatus} disabled={this.state.total >= 1000000 }> Decline </button> &nbsp;
                     </div>
                     </center>
     

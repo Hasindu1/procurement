@@ -1,12 +1,12 @@
 import firebase from '../Firebase'
-
+import * as MyConstClass from '../Constant/Constants'
 
 //Get order by id
 export const getOrder = (id) => {
 
     return   firebase
     .firestore()
-    .collection('orders')
+    .collection(MyConstClass.Order_Table)
     .doc(id)
     .get()
 
@@ -17,9 +17,9 @@ export const getPendingOrders = () =>{
 
              return firebase
             .firestore()
-            .collection('orders')
-            .where('draft','==',false)
-            .where('status','==',"Pending")
+            .collection(MyConstClass.Order_Table)
+            .where(MyConstClass.IsDraft,'==',false)
+            .where(MyConstClass.Order_Status,'==',MyConstClass.Pending)
 
 }
 
@@ -28,9 +28,9 @@ export const getApprovedOrders = () =>{
 
             return firebase
             .firestore()
-            .collection('orders')
-            .where('draft','==',false)
-            .where('status','==','Approved')
+            .collection(MyConstClass.Order_Table)
+            .where(MyConstClass.IsDraft,'==',false)
+            .where(MyConstClass.Order_Status,'==',MyConstClass.Approved)
    
 }
 
@@ -39,9 +39,9 @@ export const getDeclinedOrders = () =>{
 
             return firebase
             .firestore()
-            .collection('orders')
-            .where('draft','==',false)
-            .where('status','==','Rejected')
+            .collection(MyConstClass.Order_Table)
+            .where(MyConstClass.IsDraft,'==',false)
+            .where(MyConstClass.Order_Status,'==',MyConstClass.Declined)
 }
 
 //get sent To reference Orders
@@ -49,9 +49,9 @@ export const getSentToReferenceOrders = () => {
 
             return firebase
             .firestore()
-            .collection('orders')
-            .where('draft','==',false)
-            .where('status','==',"Sent To Reference")
+            .collection(MyConstClass.Order_Table)
+            .where(MyConstClass.IsDraft,'==',false)
+            .where(MyConstClass.Order_Status,'==',MyConstClass.Sent_To_Reference)
 
 }
 
@@ -60,9 +60,9 @@ export const getPartiallyApprovedOrders = () => {
 
     return firebase
     .firestore()
-    .collection('orders')
-    .where('draft','==',false)
-    .where('status','==',"partially approved")
+    .collection(MyConstClass.Order_Table)
+    .where(MyConstClass.IsDraft,'==',false)
+    .where(MyConstClass.Order_Status,'==',MyConstClass.Partially_Approved)
 }
 
 //change the order status to "Sent To Reference"
@@ -70,10 +70,10 @@ export const sendToReference = (id) => {
 
     return firebase
     .firestore()
-    .collection('orders')
+    .collection(MyConstClass.Order_Table)
     .doc(id)
     .update({
-        status:"Sent To Reference",
+        status: MyConstClass.Sent_To_Reference,
     })
 
 }
@@ -82,10 +82,10 @@ export const sendToReference = (id) => {
 export const Approve = (id) => {
     return firebase
     .firestore()
-    .collection('orders')
+    .collection(MyConstClass.Order_Table)
     .doc(id)
     .update({
-        status:"Approved",
+        status:MyConstClass.Approved,
     })
 }
 
@@ -94,10 +94,10 @@ export const Approve = (id) => {
 export const Decline = (id) => {
     return firebase
     .firestore()
-    .collection('orders')
+    .collection(MyConstClass.Order_Table)
     .doc(id)
     .update({
-        status:"Approved",
+        status:MyConstClass.Declined,
     })
 }
 
@@ -105,10 +105,10 @@ export const Decline = (id) => {
 export const PartiallyApprove = (id) => {
     return firebase
     .firestore()
-    .collection('orders')
+    .collection(MyConstClass.Order_Table)
     .doc(id)
     .update({
-        status:"partially approved",
+        status:MyConstClass.Partially_Approved,
     })
 }
 
@@ -117,7 +117,7 @@ export const SetRemarks = (id,remark) =>{
 
     return firebase
     .firestore()
-    .collection('orders')
+    .collection(MyConstClass.Order_Table)
     .doc(id)
     .update({
         remarks: remark

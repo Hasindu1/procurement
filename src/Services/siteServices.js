@@ -1,12 +1,13 @@
 import firebase from '../Firebase'
+import * as MyConstClass from '../Constant/Constants'
 
 //get all sites
 export const getSites = () => {
 
     return firebase
     .firestore()
-    .collection('sites')
-    
+    .collection(MyConstClass.Site_Table)
+
 }
 
 //add new site
@@ -14,7 +15,7 @@ export const addNewSite = (Site) => {
 
     return   firebase
     .firestore()
-    .collection('sites')
+    .collection(MyConstClass.Site_Table)
     .add({
         address:Site.address,
         contact:Site.contact,
@@ -30,7 +31,7 @@ export const getSite = (id) => {
 
     return firebase
     .firestore()
-    .collection('sites')
+    .collection(MyConstClass.Site_Table)
     .doc(id)
     .get()
 
@@ -41,7 +42,7 @@ export const updateSite = (id ,Site) => {
 
     return firebase
     .firestore()
-    .collection('sites')
+    .collection(MyConstClass.Site_Table)
     .doc(id)
     .set({
         name:Site.name,
@@ -58,8 +59,8 @@ export const getSiteByName = (name) => {
 
     return  firebase
     .firestore()
-    .collection('sites')
-    .where("name","==",name)
+    .collection(MyConstClass.Site_Table)
+    .where(MyConstClass.Site_Name,"==",name)
     .get()
 
 }

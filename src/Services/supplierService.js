@@ -1,11 +1,12 @@
 import firebase from '../Firebase'
+import * as MyConstClass from '../Constant/Constants'
 
 //Get a supplier using the Id
 export const getSupplier = (id) => {
 
     return   firebase
     .firestore()
-    .collection('suppliers')
+    .collection(MyConstClass.Supplier_Table)
     .doc(id)
     .get()
 
@@ -16,7 +17,7 @@ export const UpdateSupplier = (supplier_id,Supplier) => {
 
     return   firebase
     .firestore()
-    .collection('suppliers')
+    .collection(MyConstClass.Supplier_Table)
     .doc(supplier_id)
     .set({
         name:Supplier.name,
@@ -33,7 +34,7 @@ export const AddNewSupplier = (Supplier) => {
 
     return  firebase
     .firestore()
-    .collection('suppliers')
+    .collection(MyConstClass.Supplier_Table)
     .add({
         address:Supplier.address,
         availability:"test",
@@ -50,8 +51,8 @@ export const getSupplierByName = (name) => {
 
     return    firebase
     .firestore()
-    .collection('suppliers')
-    .where("name","==",name)
+    .collection(MyConstClass.Supplier_Table)
+    .where(MyConstClass.Supplier_Name,"==",name)
     .get()
 
 } 
