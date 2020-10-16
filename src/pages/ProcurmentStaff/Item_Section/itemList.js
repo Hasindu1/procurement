@@ -1,7 +1,7 @@
 import React, {useState,useEffect} from 'react'
-import NavBar from '../components/navbar'
+import NavBar from '../../../components/main/Navigation_Bar/navbar'
 import { Link } from 'react-router-dom';
-import {getItems} from '../Services/itemService'
+import {getItems} from '../../../Services/itemService'
 
 
 function useItems(){

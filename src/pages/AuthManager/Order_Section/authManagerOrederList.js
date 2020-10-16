@@ -1,6 +1,6 @@
 import React, {useState,useEffect} from 'react'
-import AuthManagerNavBar from '../components/main/authManagerNavBar'
-import firebase from '../Firebase'
+import AuthManagerNavBar from '../../../components/main/Navigation_Bar/authManagerNavBar'
+import firebase from '../../../Firebase'
 import { Link } from 'react-router-dom';
 
 

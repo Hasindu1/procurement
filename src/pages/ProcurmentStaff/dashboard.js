@@ -1,7 +1,7 @@
 import React from 'react'
 
 // components
-import NavBar from '../components/navbar'
+import NavBar from '../../components/main/Navigation_Bar/navbar'
 import { Link } from 'react-router-dom'
 
 export default function dashboard() {

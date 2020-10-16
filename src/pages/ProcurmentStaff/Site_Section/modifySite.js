@@ -1,11 +1,9 @@
 import React, { Component } from 'react'
-import firebase from '../Firebase'
-import {Link} from 'react-router-dom'
-import {addNewSite} from '../Services/siteServices'
+import { Link } from 'react-router-dom'
+import {getSite , updateSite} from '../../../Services/siteServices'
 
 
-
-export default class NewSite extends Component {
+export default class ModifySite extends Component {
     
     constructor(props){
         super(props);
@@ -22,13 +20,31 @@ export default class NewSite extends Component {
             contact:'',
             address:'',
             email:'',
+            siteId:''
 
         };
     }
 
-  
+    componentDidMount(){
+        
+       
+        getSite(this.props.match.params.id)
+        .then(res => {
+            this.setState({
+                name:res.data().name,
+                contact:res.data().contact,
+                address:res.data().address,
+                email:res.data().email,
+                siteId:this.props.match.params.id
+            })
 
-    onChangeName(e){
+
+         })
+
+
+}
+
+onChangeName(e){
     this.setState({
         name:e.target.value
     })
@@ -65,9 +81,9 @@ onSubmit(e){
         name:this.state.name,
     }
 
-    addNewSite(NewSite);
 
-   
+    updateSite(this.props.match.params.id,NewSite);
+
     
 
 }
@@ -77,15 +93,22 @@ onSubmit(e){
     render() {
         return (
             <>
-        
+            
             <div class="jumbotron" style={{marginTop: 20}}>
                 
-                <center><h3 style={{marginTop:20}}><u>New Site</u></h3></center>
-       
-       
+                <center><h3 style={{marginTop:20}}><u>Modify Site</u></h3></center>
+  
+                
+    
 
             <form onSubmit={this.onSubmit}>
 
+                <div style={{float:'right'}}>
+                        <label> Site Id :</label>
+                        <input type="text"  value={this.state.siteId} readOnly/>
+                </div>
+                <br/>
+                
     
                     <h3>Site details</h3>
     
@@ -98,7 +121,7 @@ onSubmit(e){
                     <div className="form-group">
        
                             <label> Address:</label>
-                            <input type="text" className="form-control" value={this.state.address} onChange={this.onChangeAddress}/>   
+                            <span><input type="text" className="form-control" value={this.state.address} onChange={this.onChangeAddress}/></span>    
         
                     </div>
     
@@ -108,25 +131,26 @@ onSubmit(e){
                             <span><input type="email" className="form-control" value={this.state.email} onChange={this.onChangeEmail}/></span>    
        
                     </div>
-                  
+    
                     <div className="form-group">
                              <label> Contact No</label>
                             <input type="tel" className="form-control" value={this.state.contact} onChange={this.onChangeContact}/>
                     </div>
     
     
-                    
+                  
     
                     
                     <center>
                     <div className="form-group">
-                        <button type="submit" className="btn btn-success" > Create </button> &nbsp;
-                        <Link to={"/SiteList"}><button className="btn btn-primary" > Go Back</button> </Link>
+                        <button type="submit" className="btn btn-default" > Update </button> &nbsp;
+                        <Link to={"/SiteList"}><button type="submit" className="btn btn-primary" >Go back</button> &nbsp;</Link>
+
                         
                     </div>
                     </center>
     
-    
+                 
     
                 </form>
     

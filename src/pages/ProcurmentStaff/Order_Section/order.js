@@ -1,12 +1,12 @@
 import React, { Component } from 'react'
-import AuthManagerNavBar from '../components/main/authManagerNavBar'
-import {getOrder,Approve,PartiallyApprove,Decline,SetRemarks} from '../Services/orderServices'
-import {getSupplierByName} from '../Services/supplierService'
-import {getSiteByName} from '../Services/siteServices'
-import * as MyConstClass from '../Constant/Constants'
+import NavBar from '../../../components/main/Navigation_Bar/navbar'
+import {getOrder,Approve,PartiallyApprove,Decline,sendToReference,SetRemarks} from '../../../Services/orderServices'
+import {getSupplierByName} from '../../../Services/supplierService'
+import {getSiteByName} from '../../../Services/siteServices'
+import * as MyConstClass from '../../../Constant/Constants'
 
 
-export default class AuthManagerOrder extends Component {
+export default class Order extends Component {
     
     constructor(props){
         super(props);
@@ -16,26 +16,31 @@ export default class AuthManagerOrder extends Component {
         this.onSubmit = this.onSubmit.bind(this);
 
         this.state = {
+
             //Order Properties
+
+            orderId:'', //primary key   
             comment:'',
-            date:'',
+            date:new Date(),
             description:'',
-            draft:'',
+            draft:false,
             product:'',
             quantity:0,
             status:'',
             total:0.0,
             unit:0.0,
             remarks:'',
-            orderId:'',
+           
 
             //Supplier Properties
+            suppliers:[],
             supplier:'',
             supAddress:'',
             supContact:'',
             supEmail:'',
 
             //Site Properties
+            sites:[],
             site:'',
             siteAddress:'',
             siteContact:'',
@@ -52,7 +57,6 @@ export default class AuthManagerOrder extends Component {
         getOrder(this.props.match.params.id)
         .then(res => {
             this.setState({
-                Order: res.data(),
                 comment:res.data().comment,
                 date:res.data().date,
                 description:res.data().description,
@@ -63,8 +67,10 @@ export default class AuthManagerOrder extends Component {
                 supplier:res.data().supplier,
                 total:res.data().total,
                 unit:res.data().unit,
-                orderId:this.props.match.params.id
-            })
+                orderId:this.props.match.params.id,
+                remarks:res.data().remarks
+        })
+
 
             getSupplierByName(res.data().supplier)
             .then((response) => {
@@ -77,29 +83,31 @@ export default class AuthManagerOrder extends Component {
                     })
     
                }))
-
-            })
-
-            getSiteByName(res.data().site)
-            .then((response) => {
-               response.forEach((site => {
-             
-                    this.setState({
-                        site:site.data().name,
-                        siteAddress:site.data().address,
-                        siteContact:site.data().contact,
-                        siteEmail:site.data().email
-                    })
-    
-               }))
     
           
     
                })
 
+        
+        getSiteByName(res.data().site)
+        .then((response) => {
+           response.forEach((site => {
+         
+                this.setState({
+                    site:site.data().name,
+                    siteAddress:site.data().address,
+                    siteContact:site.data().contact,
+                    siteEmail:site.data().email
+                })
 
-       
-     })
+           }))
+
+      
+
+           })
+         })
+
+
 
 
 }
@@ -114,8 +122,6 @@ onSubmit(e){
 
     e.preventDefault();
 
-    e.preventDefault();
-
     /**
      * Conditionally calling the set status methods
      */
@@ -127,6 +133,10 @@ onSubmit(e){
     else if(this.state.status == MyConstClass.Declined){
         Decline(this.props.match.params.id);
     }
+
+    else if(this.state.status == MyConstClass.Sent_To_Reference){
+        sendToReference(this.props.match.params.id);
+    }
     
     else if(this.state.status == MyConstClass.Partially_Approved){
         PartiallyApprove(this.props.match.params.id);
@@ -136,7 +146,6 @@ onSubmit(e){
     //set the Order Remark
     SetRemarks(this.props.match.params.id,this.state.remarks);
     
-
 }
 
 changeStatus(e) {
@@ -153,7 +162,7 @@ changeStatus(e) {
     render() {
         return (
             <>
-            <AuthManagerNavBar/>
+            <NavBar/>
             <div class="jumbotron" style={{marginTop: 20}}>
                 
                 <center><h3 style={{marginTop:20}}><u>Order Request</u></h3></center>
@@ -261,18 +270,18 @@ changeStatus(e) {
                     
                     <center>
                     <div className="form-group">
-                        <button type="submit" className="btn btn-success" value={MyConstClass.Approved} onClick={this.changeStatus}> Approve </button> &nbsp;
-                        <button type="submit" className="btn btn-warning" value={MyConstClass.Partially_Approved} onClick={this.changeStatus}> Partially Approve</button> &nbsp;
-                        <button type="submit" className="btn btn-danger" value={MyConstClass.Declined} onClick={this.changeStatus}> Decline </button> &nbsp;
-
+                        <button type="submit" className="btn btn-success" value={MyConstClass.Approved} onClick={this.changeStatus} disabled={this.state.total >= 1000000 }> Approve </button> &nbsp;
+                        <button type="submit" className="btn btn-warning" value={MyConstClass.Partially_Approved} onClick={this.changeStatus} disabled={this.state.total >= 1000000 }> Partially Approve</button> &nbsp;
+                        <button type="submit" className="btn btn-primary" value={MyConstClass.Sent_To_Reference} onClick={this.changeStatus}> Reffered </button> &nbsp;
+                        <button type="submit" className="btn btn-danger" value={MyConstClass.Declined} onClick={this.changeStatus} disabled={this.state.total >= 1000000 }> Decline </button> &nbsp;
                     </div>
                     </center>
     
                     <div className="form-group">
                             <label>Remarks</label>
-                            <textarea id="w3review" name="w3review" rows="4" cols="50" className="form-control" value={this.state.remarks} onChange={this.onChangeRemarks}>
-                                {this.state.remarks}
-                            </textarea>
+                            <textarea id="w3review" name="w3review" rows="4" cols="50" className="form-control" value={this.state.remarks} onChange={this.onChangeRemarks} />
+
+                            
                      </div>
     
     

@@ -1,8 +1,8 @@
 import React, {useState,useEffect} from 'react'
-import NavBar from '../components/navbar'
-import firebase from '../Firebase'
+import NavBar from '../../../components/main/Navigation_Bar/navbar'
+import firebase from '../../../Firebase'
 import { Link } from 'react-router-dom'
-import {getPendingOrders , getApprovedOrders, getDeclinedOrders ,getSentToReferenceOrders , getPartiallyApprovedOrders , sendToReference} from '../Services/orderServices'
+import {getPendingOrders , getApprovedOrders, getDeclinedOrders ,getSentToReferenceOrders , getPartiallyApprovedOrders , sendToReference} from '../../../Services/orderServices'
 
 
 function usePendingOrders(){

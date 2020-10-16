@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
-import { Link } from 'react-router-dom'
-import {getSite , updateSite} from '../Services/siteServices'
+import {Link} from 'react-router-dom'
+import {AddNewSupplier} from '../../../Services/supplierService'
 
 
-export default class ModifySite extends Component {
+
+export default class NewSupplier extends Component {
     
     constructor(props){
         super(props);
@@ -15,36 +16,18 @@ export default class ModifySite extends Component {
         this.onSubmit = this.onSubmit.bind(this);
 
         this.state = {
-            //site Properties
+            //Supplier Attributes
             name:'',
             contact:'',
             address:'',
             email:'',
-            siteId:''
 
         };
     }
 
-    componentDidMount(){
-        
-       
-        getSite(this.props.match.params.id)
-        .then(res => {
-            this.setState({
-                name:res.data().name,
-                contact:res.data().contact,
-                address:res.data().address,
-                email:res.data().email,
-                siteId:this.props.match.params.id
-            })
+  
 
-
-         })
-
-
-}
-
-onChangeName(e){
+    onChangeName(e){
     this.setState({
         name:e.target.value
     })
@@ -74,16 +57,15 @@ onChangeEmail(e){
 onSubmit(e){
     e.preventDefault();
 
-    const NewSite = {
+    const Supplier = {
         address:this.state.address,
+        availability:"test",
         contact:this.state.contact,
         email:this.state.email,
         name:this.state.name,
     }
 
-
-    updateSite(this.props.match.params.id,NewSite);
-
+    AddNewSupplier(Supplier);
     
 
 }
@@ -93,35 +75,28 @@ onSubmit(e){
     render() {
         return (
             <>
-            
+        
             <div class="jumbotron" style={{marginTop: 20}}>
                 
-                <center><h3 style={{marginTop:20}}><u>Modify Site</u></h3></center>
-  
-                
-    
+                <center><h3 style={{marginTop:20}}><u>New Supplier</u></h3></center>
+       
+       
 
             <form onSubmit={this.onSubmit}>
 
-                <div style={{float:'right'}}>
-                        <label> Site Id :</label>
-                        <input type="text"  value={this.state.siteId} readOnly/>
-                </div>
-                <br/>
-                
     
-                    <h3>Site details</h3>
+                    <h3>Supplier details</h3>
     
     
                     <div className="form-group">
-                            <label> Site Name :</label>
+                            <label> Supplier Name :</label>
                             <input type="text" className="form-control" value={this.state.name} onChange={this.onChangeName}/>
                     </div>
     
                     <div className="form-group">
        
                             <label> Address:</label>
-                            <span><input type="text" className="form-control" value={this.state.address} onChange={this.onChangeAddress}/></span>    
+                            <input type="text" className="form-control" value={this.state.address} onChange={this.onChangeAddress}/>   
         
                     </div>
     
@@ -136,21 +111,20 @@ onSubmit(e){
                              <label> Contact No</label>
                             <input type="tel" className="form-control" value={this.state.contact} onChange={this.onChangeContact}/>
                     </div>
+                    
     
-    
-                  
+                    
     
                     
                     <center>
                     <div className="form-group">
-                        <button type="submit" className="btn btn-default" > Update </button> &nbsp;
-                        <Link to={"/SiteList"}><button type="submit" className="btn btn-primary" >Go back</button> &nbsp;</Link>
-
+                        <button type="submit" className="btn btn-success" > Create </button> &nbsp;
+                        <Link to={"/SupplierList"}><button className="btn btn-primary" > Go Back</button> </Link>
                         
                     </div>
                     </center>
     
-                 
+    
     
                 </form>
     

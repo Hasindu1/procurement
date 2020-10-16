@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
-import firebase from '../Firebase'
+import firebase from '../../../Firebase'
 import { Link } from 'react-router-dom'
 import Sites from "./supplierSitesList" 
-import {getSupplier,UpdateSupplier} from "../Services/supplierService"
-import {getSites} from "../Services/siteServices"
+import {getSupplier,UpdateSupplier} from "../../../Services/supplierService"
+import {getSites} from "../../../Services/siteServices"
 
 
 export default class ModifySupplier extends Component {

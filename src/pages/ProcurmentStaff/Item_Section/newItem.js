@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
-import firebase from '../Firebase'
+import firebase from '../../../Firebase'
 import {Link} from 'react-router-dom'
-import {AddNewItem} from '../Services/itemService'
+import {AddNewItem} from '../../../Services/itemService'
 
 
 

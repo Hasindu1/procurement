@@ -14,8 +14,12 @@ const AuthManagerNavBar = () => {
                 <li  className="navbar-item">
                     <Link to={'/AuthManagerOrderList'} className="nav-link">Home</Link>
                 </li>
-               
-
+                <li  className="navbar-item">
+                    <Link to={'/AuthManagerOrderList'} className="nav-link">Policies</Link>
+                </li>
+                <li  className="navbar-item">
+                    <Link to={'/AuthManagerOrderList'} className="nav-link">Others</Link>
+                </li>
             </ul>
             
                      <button className="ml-auto" onClick = {logout}>

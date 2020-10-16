@@ -3,25 +3,25 @@ import "bootstrap/dist/css/bootstrap.min.css"
 import {BrowserRouter as Router,Route} from "react-router-dom";
 
 
-import NavBar from './components/navbar'
 
-// components
-import Login from './pages/login'
-import Dashboard from './pages/dashboard'
-import Order from './pages/order'
-import OrderList from './pages/orderList'
-import AuthManagerOrderList from './pages/authManagerOrederList'
-import AuthManagerOrder from './pages/authManagerOrder'
-import login from './pages/login'
-import SupplierList from "./pages/supplierList"
-import SiteList from "./pages/siteList"
-import newSupplier from "./pages/newSupplier"
-import newSite from "./pages/newSite"
-import modifySupplier from "./pages/modifySupplier"
-import modifySite from "./pages/modifySite"
-import modifyItem from "./pages/modifyItem"
-import ItemList from "./pages/itemList"
-import newItem from "./pages/newItem"
+
+// Pages
+
+import Dashboard from './pages/ProcurmentStaff/dashboard'
+import Order from './pages/ProcurmentStaff/Order_Section/order'
+import OrderList from './pages/ProcurmentStaff/Order_Section/orderList'
+import AuthManagerOrderList from './pages/AuthManager/Order_Section/authManagerOrederList'
+import AuthManagerOrder from './pages/AuthManager/Order_Section/authManagerOrder'
+import login from './pages/Login/login'
+import SupplierList from "./pages/ProcurmentStaff/Supplier_Section/supplierList"
+import SiteList from "./pages/ProcurmentStaff/Site_Section/siteList"
+import newSupplier from "./pages/ProcurmentStaff/Supplier_Section/newSupplier"
+import newSite from "./pages/ProcurmentStaff/Site_Section/newSite"
+import modifySupplier from "./pages/ProcurmentStaff/Supplier_Section/modifySupplier"
+import modifySite from "./pages/ProcurmentStaff/Site_Section/modifySite"
+import modifyItem from "./pages/ProcurmentStaff/Item_Section/modifyItem"
+import ItemList from "./pages/ProcurmentStaff/Item_Section/itemList"
+import newItem from "./pages/ProcurmentStaff/Item_Section/newItem"
 
 export default function App() {
   return (

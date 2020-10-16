@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
-import firebase from '../Firebase'
+import firebase from '../../../Firebase'
 import { Link } from 'react-router-dom'
-import {getitem , updateItem} from '../Services/itemService'
+import {getitem , updateItem} from '../../../Services/itemService'
 
 
 export default class ModifyItem extends Component {
