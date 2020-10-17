@@ -44,7 +44,7 @@ export default class Policy extends Component {
        
        
 
-            <form onSubmit={this.onSubmit}>
+            <form onSubmit={this.onSubmit} className="policy">
 
     
                     <h3>Policy Details</h3>
@@ -52,7 +52,7 @@ export default class Policy extends Component {
     
                     <div className="form-group">
                             <label> Staff Approve Limit :</label>
-                            <input type="number" className="form-control" value={this.state.staffApproveLimit} readOnly/>
+                            <input type="number" id="staffApproveLimit" name="staffApproveLimit" className="form-control" value={this.state.staffApproveLimit} readOnly/>
                     </div>
     
                     <div className="form-group">

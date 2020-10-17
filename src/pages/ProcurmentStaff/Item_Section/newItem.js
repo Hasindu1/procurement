@@ -68,7 +68,7 @@ onSubmit(e){
        
        
 
-            <form onSubmit={this.onSubmit}>
+            <form onSubmit={this.onSubmit} className="item">
 
     
                     <h3>Item Details</h3>
@@ -82,7 +82,7 @@ onSubmit(e){
                     <div className="form-group">
        
                             <label> Unit Price</label>
-                            <input type="number" className="form-control" value={this.state.unitPrice} onChange={this.onChangeUnitPrice}/>   
+                            <input type="number" id="unit_price" name="unit_price" className="form-control" value={this.state.unitPrice} onChange={this.onChangeUnitPrice}/>   
         
                     </div>
     

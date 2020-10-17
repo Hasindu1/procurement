@@ -84,7 +84,7 @@ onSubmit(e){
        
        
 
-            <form onSubmit={this.onSubmit}>
+            <form onSubmit={this.onSubmit} className="site">
 
     
                     <h3>Site details</h3>
@@ -105,7 +105,7 @@ onSubmit(e){
                     <div className="form-group">
        
                              <label> Email:</label>
-                            <span><input type="email" className="form-control" value={this.state.email} onChange={this.onChangeEmail}/></span>    
+                            <span><input type="email" id="email" name="email" className="form-control" value={this.state.email} onChange={this.onChangeEmail}/></span>    
        
                     </div>
                   
