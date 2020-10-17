@@ -37,14 +37,21 @@ export default class HandlePayment extends Component {
         .then(res => {
             this.setState({
                 deliveryId:this.props.match.params.id,
-                orderId:res.data().OrderRef,
-                total:res.data().tot,
-                unitPrice:res.data().unit,
-                Item:res.data().Item,
-                quantity:res.data().qty,
+                orderId:res.data().orderRef,
+                Item:res.data().item,
         })
 
-     })
+        getOrder(res.data().orderRef)
+        .then(res => {
+            this.setState({
+                unitPrice:res.data().quantity,
+                quantity:res.data().unit,
+                total:res.data().unit * res.data().quantity
+        })    
+
+    })
+
+ })
 
      getAccount_Balance_Budget()
      .then(res => {

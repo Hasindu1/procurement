@@ -1,25 +1,25 @@
 import React from 'react'
 
 // components
-import NavBar from '../../components/main/Navigation_Bar/navbar'
+import  AuthManagerNavBar from '../../components/main/Navigation_Bar/authManagerNavBar'
 import { Link } from 'react-router-dom'
 
 export default function dashboard() {
     return (
         <>
-        <NavBar/>
+        <AuthManagerNavBar/>
         <div class="jumbotron" style={{marginTop: 20}}>
-            <h2 style={{textAlign: "center"}}><u>Welcome to the Procurement Staff DashBaord</u></h2>
+            <h2 style={{textAlign: "center"}}><u>Welcome to the Procurement Auth Manager DashBaord</u></h2>
         </div>
         <div class="card-group">
 
         <div class="card">
                 <div class="card-body">
                         <h4 class="card-title"> <b>Orders</b></h4>
-                        <p class="card-text">You can go to the Orders Section</p>
+                        <p class="card-text">You can go to the Orders Section (Should Reffered)</p>
                         </div>
                 <div class="card-footer">
-                        <center><Link to={"/OrderList"}><button className="btn btn-primary" >Go to</button> </Link></center>
+                        <center><Link to={"/AuthManagerOrderList"}><button className="btn btn-primary" >Go to</button> </Link></center>
                 </div>
         </div>
 
@@ -29,7 +29,7 @@ export default function dashboard() {
                         <p class="card-text">You can go to the Supplier Section</p>
                         </div>
                 <div class="card-footer">
-                        <center><Link to={"/SupplierList"}><button className="btn btn-primary" >Go to</button> </Link></center>
+                        <center><Link to={"/AuthManagerSupplierList"}><button className="btn btn-primary" >Go to</button> </Link></center>
                 </div>
         </div>
         <div class="card">
@@ -38,7 +38,7 @@ export default function dashboard() {
                         <p class="card-text">You can go to the Item Section</p>
                         </div>
                 <div class="card-footer">
-                        <center><Link to={"/ItemList"}><button className="btn btn-primary" >Go to</button> </Link></center>
+                        <center><Link to={"/AuthManagerItemList"}><button className="btn btn-primary" >Go to</button> </Link></center>
                 </div>
         </div>
         <div class="card">
@@ -47,7 +47,7 @@ export default function dashboard() {
                         <p class="card-text">You can go to the Sites Section</p>
                         </div>
                 <div class="card-footer">
-                <center><Link to={"/SiteList"}><button className="btn btn-primary" >Go to</button> </Link></center>
+                <center><Link to={"/AuthManagerSiteList"}><button className="btn btn-primary" >Go to</button> </Link></center>
                 </div>
         </div>
         </div>
@@ -60,7 +60,7 @@ export default function dashboard() {
                  <p class="card-text">You can go to the Delivery Section</p>
                  </div>
          <div class="card-footer">
-                 <center><Link to={"/delivery"}><button className="btn btn-primary" >Go to</button> </Link></center>
+                 <center><Link to={"/AuthManagerDeliveryList"}><button className="btn btn-primary" >Go to</button> </Link></center>
          </div>
  </div>
  <div class="card">
@@ -69,7 +69,7 @@ export default function dashboard() {
                  <p class="card-text">You can go to the Payment Section</p>
                  </div>
          <div class="card-footer">
-                 <center><Link to={"/paymentList"}><button className="btn btn-primary" >Go to</button> </Link></center>
+                 <center><Link to={"/AuthManagerPaymentList"}><button className="btn btn-primary" >Go to</button> </Link></center>
          </div>
  </div>
  <div class="card">
@@ -78,7 +78,7 @@ export default function dashboard() {
                  <p class="card-text">You can go to the Sites Section</p>
                  </div>
          <div class="card-footer">
-         <center><Link to={"/policyDisplay"}><button className="btn btn-primary" >Go to</button> </Link></center>
+         <center><Link to={"/policy"}><button className="btn btn-primary" >Go to</button> </Link></center>
          </div>
  </div>
  <div class="card">
@@ -87,7 +87,7 @@ export default function dashboard() {
                  <p class="card-text">You can go to the Financial Settings Section</p>
                  </div>
          <div class="card-footer">
-         <center><Link to={"/accountDisplay"}><button className="btn btn-primary" >Go to</button> </Link></center>
+         <center><Link to={"/Account"}><button className="btn btn-primary" >Go to</button> </Link></center>
          </div>
  </div>
  </div>

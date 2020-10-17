@@ -4,10 +4,10 @@ export const Item_Table = "items"
 export const Site_Table = "sites"
 export const Order_Table = "orders"
 export const Site_Supplier_Table = "sitesOfSupplier"
-export const Policy_Table = "policies"
-export const Delivery_Table = "Delivery"
-export const Payment_Table = "Payment"
-export const Account_Table = "Account"
+export const Policy_Table = "policy"
+export const Delivery_Table = "deliveries"
+export const Payment_Table = "payment"
+export const Account_Table = "account"
 
 //attributes of order collection
 export const IsDraft = "draft"
@@ -32,7 +32,7 @@ export const Site = "site"
 export const Supplier = "supplier"
 
 //attributes of Policy collection
-export const Policy_ID = "fVr0ac5nhXlF78cizaMk"
+export const Policy_ID = "p2BrnISwxxVRHEVR5CHK"
 
 //attributes of Account collection
-export const Account_ID = "BGzoHC7UYUrgks6v4p8y"
+export const Account_ID = "qtUsrOuR79wWhIYkUC3K"

@@ -22,7 +22,7 @@ export default class Order extends Component {
 
             orderId:'', //primary key   
             comment:'',
-            date:new Date(),
+            date:Date.now(),
             description:'',
             draft:false,
             product:'',
@@ -265,7 +265,7 @@ changeStatus(e) {
     
                      <div className="form-group">
                            <label> Required Date</label>
-                           <input type="date" className="form-control" readOnly />
+                           <input type="text" className="form-control" value={new Date(this.state.date).toDateString()} readOnly />
                      </div>
     
                      <div className="form-group">

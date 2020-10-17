@@ -8,17 +8,11 @@ function logout(){
 const AuthManagerNavBar = () => {
     return (
         <nav className="navbar navbar-dark bg-dark navbar-expand-lg">
-        <Link to={'/'} className="navbar-brand"> <h4 style={{color:"green"}}>Logo</h4></Link>
+        <Link to={'/AuthDashBoard'} className="navbar-brand"> <h4 style={{color:"green"}}>Logo</h4></Link>
         <div className="collapse navbar-collapse">
             <ul className="navbar-nav mr-auto">
                 <li  className="navbar-item">
-                    <Link to={'/AuthManagerOrderList'} className="nav-link">Home</Link>
-                </li>
-                <li  className="navbar-item">
-                    <Link to={'/AuthManagerOrderList'} className="nav-link">Policies</Link>
-                </li>
-                <li  className="navbar-item">
-                    <Link to={'/AuthManagerOrderList'} className="nav-link">Others</Link>
+                    <Link to={'/AuthDashBoard'} className="nav-link">Home</Link>
                 </li>
             </ul>
             

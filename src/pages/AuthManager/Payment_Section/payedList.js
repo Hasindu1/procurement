@@ -1,5 +1,5 @@
 import React, {useState,useEffect} from 'react'
-import NavBar from '../../../components/main/Navigation_Bar/navbar'
+import AuthManagerNavBar from '../../../components/main/Navigation_Bar/authManagerNavBar'
 import {getPaymentDetails} from '../../../Services/paymentService'
 
 
@@ -32,7 +32,7 @@ const PayedList = () =>{
 
     return (
         <>
-        <NavBar/>
+         <AuthManagerNavBar/>
         <h1 className="text-capitalize text-center">Payment List</h1>
 
         <ul className="list-group my-5">

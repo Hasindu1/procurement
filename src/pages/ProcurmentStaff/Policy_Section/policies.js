@@ -1,18 +1,14 @@
 import React, { Component } from 'react'
 import {Link} from 'react-router-dom'
-import {getApprovalLimits,setStaffAprovalLimit,setSiteManagerAprovalLimit} from '../../../Services/policyService'
-import AuthManagerNavBar from '../../../components/main/Navigation_Bar/authManagerNavBar'
+import {getApprovalLimits} from '../../../Services/policyService'
+import NavBar from '../../../components/main/Navigation_Bar/navbar'
 
 
 
-export default class NewPolicy extends Component {
+export default class Policy extends Component {
     
     constructor(props){
         super(props);
-
-        this.onChangeStaffApproveLimit = this.onChangeStaffApproveLimit.bind(this);
-        this.onChangeSiteManagerApproveLimit = this.onChangeSiteManagerApproveLimit.bind(this);
-        this.onSubmit = this.onSubmit.bind(this);
 
         this.state = {
 
@@ -36,37 +32,12 @@ export default class NewPolicy extends Component {
   
 }
 
-    onChangeStaffApproveLimit(e){
-    this.setState({
-        staffApproveLimit:e.target.value
-    })
-
-    }
-
-
-    onChangeSiteManagerApproveLimit(e){
-    this.setState({
-        siteManagerApproveLimit:e.target.value
-    })
-}
-
-
-onSubmit(e){
-
-    e.preventDefault();
-
-    setStaffAprovalLimit(this.state.staffApproveLimit);
-    setSiteManagerAprovalLimit(this.state.siteManagerApproveLimit)
-
-
-}
-
-
+   
 
     render() {
         return (
             <>
-         <AuthManagerNavBar/>
+        <NavBar/>
             <div class="jumbotron" style={{marginTop: 20}}>
                 
                 <center><h3 style={{marginTop:20}}><u>Policies</u></h3></center>
@@ -81,13 +52,13 @@ onSubmit(e){
     
                     <div className="form-group">
                             <label> Staff Approve Limit :</label>
-                            <input type="number" className="form-control" value={this.state.staffApproveLimit} onChange={this.onChangeStaffApproveLimit}/>
+                            <input type="number" className="form-control" value={this.state.staffApproveLimit} readOnly/>
                     </div>
     
                     <div className="form-group">
        
                             <label> Site Manager Approve Limit:</label>
-                            <input type="number" className="form-control" value={this.state.siteManagerApproveLimit} onChange={this.onChangeSiteManagerApproveLimit}/>   
+                            <input type="number" className="form-control" value={this.state.siteManagerApproveLimit} readOnly/>   
         
                     </div>
     
@@ -95,8 +66,8 @@ onSubmit(e){
                     
                     <center>
                     <div className="form-group">
-                        <button type="submit" className="btn btn-success" > Update Policies </button> &nbsp;
-                        <Link to={"/AuthDashBoard"}><button className="btn btn-primary" > Go Back</button> </Link>
+            
+                        <Link to={"/Dashboard"}><button className="btn btn-primary" > Go Back</button> </Link>
                         
                     </div>
                     </center>

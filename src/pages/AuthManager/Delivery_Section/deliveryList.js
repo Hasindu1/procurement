@@ -2,7 +2,7 @@ import React, {useState,useEffect} from 'react'
 import NavBar from '../../../components/main/Navigation_Bar/navbar'
 import { Link } from 'react-router-dom'
 import {getDeliveries} from '../../../Services/deliveryService'
-
+import AuthManagerNavBar from '../../../components/main/Navigation_Bar/authManagerNavBar'
 
 function useDeliveries(){
     const [deliveries,setDeliveries] = useState([])
@@ -33,22 +33,22 @@ const DeliveryList = () =>{
 
     return (
         <>
-        <NavBar/>
+        <AuthManagerNavBar/>
         <h1 className="text-capitalize text-center">Deliveries</h1>
 
         <ul className="list-group my-5">
                 
         <h3><u>Deliveries</u></h3>
                 {deliveries.map((delivery) => 
-                    <Link to={"/delivery"+delivery.id}> 
+
                         <li className="list-group-item text-capitalize d-flex justify-content-between my-2">
                         <ul>
                              <li> <h6>Delivery ID : {delivery.id}</h6></li>
-                             <li><h6>Order Reference ID     : {delivery.orderRef}</h6></li>
+                             <li><h6>Order Reference ID     : {delivery.OrderRef}</h6></li>
                         </ul>
                             
                         </li>
-                     </Link> 
+                    
                 )}
             </ul>
            

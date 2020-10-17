@@ -37,7 +37,7 @@ onSubmit(e){
     window.location = '/Dashboard';
   }
   else if(this.state.email =="AuthAdmin@gmail.com" && this.state.passsword =="12345"){
-    window.location = '/AuthManagerOrderList';
+    window.location = '/AuthDashBoard';
   }
   else{
     alert("Invalid Credentials . Please try again");
