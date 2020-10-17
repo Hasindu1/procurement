@@ -128,6 +128,11 @@ const OrderList = () =>{
     return (
         <>
         <NavBar/>
+
+        <div style={{float:'right'}}>
+        <Link to={"/enquiries"}><button className="btn btn-primary" > Enquiries </button> </Link>
+        </div>
+
         <h1 className="text-capitalize text-center">Requests</h1>
 
         <ul className="list-group my-5">

@@ -32,6 +32,7 @@ import AuthManagerItemList from './pages/AuthManager/Item_Section/itemList'
 import AuthManagerDeliveryList from './pages/AuthManager/Delivery_Section/deliveryList'
 import AuthManagerPaymentList from './pages/AuthManager/Payment_Section/payedList'
 import Account from './pages/AuthManager/Account_Section/account'
+import EnquiryList from './pages/ProcurmentStaff/Order_Section/enquiryList';
 
 
 export default function App() {
@@ -61,6 +62,7 @@ export default function App() {
   <Route path="/paymentList" component={PayedList}/>
   <Route path="/accountDisplay" component={AccountDisplay}/>
   <Route path="/policyDisplay" component={PolicyDisplay}/>
+  <Route path="/enquiries" component={EnquiryList}/>
 
   {/*Auth Manager Routes */}
   <Route path="/AuthDashBoard" component={AuthDashboard}/>

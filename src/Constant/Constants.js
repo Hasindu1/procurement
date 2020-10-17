@@ -8,6 +8,7 @@ export const Policy_Table = "policy"
 export const Delivery_Table = "deliveries"
 export const Payment_Table = "payment"
 export const Account_Table = "account"
+export const Enquiry_Table = "enquiries"
 
 //attributes of order collection
 export const IsDraft = "draft"
