@@ -36,3 +36,9 @@ export const Policy_ID = "p2BrnISwxxVRHEVR5CHK"
 
 //attributes of Account collection
 export const Account_ID = "qtUsrOuR79wWhIYkUC3K"
+
+//login Credentails
+export const Procurement_Staff_User_Name = "ProcStaff@gmail.com"
+export const Procurement_Staff_Password = "12345"
+export const Auth_Manager_User_Name = "AuthAdmin@gmail.com"
+export const Auth_Manager_Password = "12345"

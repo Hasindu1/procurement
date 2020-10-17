@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-
+import * as MyConstClass from '../../Constant/Constants'
 
 export default class Login extends Component {
 
@@ -33,10 +33,10 @@ onSubmit(e){
 
   e.preventDefault();
 
-  if(this.state.email =="ProcStaff@gmail.com" && this.state.passsword =="12345"){
+  if(this.state.email == MyConstClass.Procurement_Staff_User_Name && this.state.passsword == MyConstClass.Procurement_Staff_Password){
     window.location = '/Dashboard';
   }
-  else if(this.state.email =="AuthAdmin@gmail.com" && this.state.passsword =="12345"){
+  else if(this.state.email ==MyConstClass.Auth_Manager_User_Name && this.state.passsword ==MyConstClass.Auth_Manager_Password){
     window.location = '/AuthDashBoard';
   }
   else{
