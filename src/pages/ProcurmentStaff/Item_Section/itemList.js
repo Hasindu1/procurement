@@ -46,7 +46,7 @@ const ItemList = () =>{
                         <li className="list-group-item text-capitalize d-flex justify-content-between my-2">
                         <ul>
                              <li> <h6>item Name: {item.name}</h6></li>
-                             <li><h6>Item Unit Price      : {item.unit_price}</h6></li>
+                             <li><h6>Item Unit Price      : {item.price}</h6></li>
                         </ul>
                             
                         </li>

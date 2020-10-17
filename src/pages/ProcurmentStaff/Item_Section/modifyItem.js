@@ -16,7 +16,7 @@ export default class ModifyItem extends Component {
         this.state = {
             //item Properties
             name:'',
-            unitPrice:0
+            price:0
         };
     }
 

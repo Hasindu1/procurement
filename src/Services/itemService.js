@@ -21,7 +21,7 @@ export const updateItem = (id,Item) => {
     .doc(id)
     .set({
         name:Item.name,
-        unit_price:Item.unit_price
+        price:Item.unit_price
     })
 }
 
@@ -33,7 +33,7 @@ export const AddNewItem = (Item) => {
     .collection(MyConstClass.Item_Table)
     .add({
         name:Item.name,
-        unit_price:Item.unit_price
+        price:Item.unit_price
     })
 }
 
