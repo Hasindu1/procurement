@@ -8,7 +8,9 @@ export const addPayment = (payment) => {
      .firestore()
      .collection(MyConstClass.Payment_Table)
      .add({
-
+        deliveryId:payment.deliveryId,
+        OrderRef:payment.orderId,   
+        totPayment:payment.total
      })
  
  }

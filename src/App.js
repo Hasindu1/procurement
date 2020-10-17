@@ -23,6 +23,9 @@ import modifyItem from "./pages/ProcurmentStaff/Item_Section/modifyItem"
 import ItemList from "./pages/ProcurmentStaff/Item_Section/itemList"
 import newItem from "./pages/ProcurmentStaff/Item_Section/newItem"
 import policy from "./pages/AuthManager/Policy_Section/policies"
+import DeliveryList from './pages/ProcurmentStaff/Delivery_Section/deliveryList'
+import HandlePayment from './pages/ProcurmentStaff/Payment_Section/handlePayment';
+import PayedList from './pages/ProcurmentStaff/Payment_Section/payedList';
 
 export default function App() {
   return (
@@ -46,6 +49,10 @@ export default function App() {
   <Route path="/newItem" component={newItem}/>
   <Route path="/modifyItem:id" component={modifyItem}/>
   <Route path="/policy" component={policy}/>
+  <Route path="/delivery" component={DeliveryList}/>
+  <Route path="/delivery:id" component={HandlePayment} />
+  <Route path="/paymentList" component={PayedList}/>
+    
   </div>
   </Router>
   )

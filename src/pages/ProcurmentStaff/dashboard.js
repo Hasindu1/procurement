@@ -9,38 +9,78 @@ export default function dashboard() {
         <>
         <NavBar/>
         <div class="jumbotron" style={{marginTop: 20}}>
-            <h2 style={{textAlign: "center"}}><u>Welcome to the Our Procurement System Admin DashBaord</u></h2>
+            <h2 style={{textAlign: "center"}}><u>Welcome to the Procurement Staff DashBaord</u></h2>
         </div>
         <div class="card-group">
  
         <div class="card">
                 <div class="card-body">
-                        <h4 class="card-title">Suppliers</h4>
+                        <h4 class="card-title"> <b>Suppliers</b></h4>
                         <p class="card-text">You can go to the Supplier Section</p>
                         </div>
                 <div class="card-footer">
-                        <Link to={"/SupplierList"}><button className="btn btn-primary" >Go to</button> </Link>
+                        <center><Link to={"/SupplierList"}><button className="btn btn-primary" >Go to</button> </Link></center>
                 </div>
         </div>
         <div class="card">
                 <div class="card-body">
-                        <h4 class="card-title">Items</h4>
+                        <h4 class="card-title"><b>Items</b></h4>
                         <p class="card-text">You can go to the Item Section</p>
                         </div>
                 <div class="card-footer">
-                        <Link to={"/ItemList"}><button className="btn btn-primary" >Go to</button> </Link>
+                        <center><Link to={"/ItemList"}><button className="btn btn-primary" >Go to</button> </Link></center>
                 </div>
         </div>
         <div class="card">
                 <div class="card-body">
-                        <h4 class="card-title">Sites</h4>
+                        <h4 class="card-title"><b>Sites</b></h4>
                         <p class="card-text">You can go to the Sites Section</p>
                         </div>
                 <div class="card-footer">
-                <Link to={"/SiteList"}><button className="btn btn-primary" >Go to</button> </Link>
+                <center><Link to={"/SiteList"}><button className="btn btn-primary" >Go to</button> </Link></center>
                 </div>
         </div>
         </div>
+
+        <div class="card-group">
+ 
+ <div class="card">
+         <div class="card-body">
+                 <h4 class="card-title"> <b>Deliveries</b></h4>
+                 <p class="card-text">You can go to the Delivery Section</p>
+                 </div>
+         <div class="card-footer">
+                 <center><Link to={"/delivery"}><button className="btn btn-primary" >Go to</button> </Link></center>
+         </div>
+ </div>
+ <div class="card">
+         <div class="card-body">
+                 <h4 class="card-title"><b>Payments</b></h4>
+                 <p class="card-text">You can go to the Payment Section</p>
+                 </div>
+         <div class="card-footer">
+                 <center><Link to={"/paymentList"}><button className="btn btn-primary" >Go to</button> </Link></center>
+         </div>
+ </div>
+ <div class="card">
+         <div class="card-body">
+                 <h4 class="card-title"><b>Policies</b></h4>
+                 <p class="card-text">You can go to the Sites Section</p>
+                 </div>
+         <div class="card-footer">
+         <center><Link to={"/"}><button className="btn btn-primary" >Go to</button> </Link></center>
+         </div>
+ </div>
+ <div class="card">
+         <div class="card-body">
+                 <h4 class="card-title"><b>Financial Settings</b></h4>
+                 <p class="card-text">You can go to the Financial Settings Section</p>
+                 </div>
+         <div class="card-footer">
+         <center><Link to={"/"}><button className="btn btn-primary" >Go to</button> </Link></center>
+         </div>
+ </div>
+ </div>
 
        </>
     )
