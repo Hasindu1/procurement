@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import firebase from '../../../Firebase'
 import { Link } from 'react-router-dom'
 import {getSupplier,UpdateSupplier,addSite} from "../../../Services/supplierService"
 import {getSites,getSitesBySupplierName} from "../../../Services/siteServices"
@@ -15,6 +14,7 @@ export default class ModifySupplier extends Component {
         this.onChangeContact = this.onChangeContact.bind(this);
         this.onChangeAddress = this.onChangeAddress.bind(this);
         this.onChangeEmail = this.onChangeEmail.bind(this);
+        this.onChangeDepot = this.onChangeDepot.bind(this);
         this.onChangeSiteName = this.onChangeSiteName.bind(this);
 
         this.onSubmit = this.onSubmit.bind(this);
@@ -28,8 +28,12 @@ export default class ModifySupplier extends Component {
             email:'',
             supId:'',
             siteName:'',
+            depotName:'',
+            selectedSites:[],
+
+            //All the sites
             sites:[],
-            selectedSites:[]
+            
 
         };
     }
@@ -44,7 +48,8 @@ export default class ModifySupplier extends Component {
                 contact:res.data().contact,
                 address:res.data().address,
                 email:res.data().email,
-                supId:this.props.match.params.id
+                supId:this.props.match.params.id,
+                depotName:res.data().depot
             })
 
             //Retrieve Site List for this Supplier
@@ -110,6 +115,12 @@ onChangeSiteName(e){
     })
 }
 
+onChangeDepot(e){
+    this.setState({
+        depotName:e.target.value
+    })
+}
+
 
 onSubmit(e){
     e.preventDefault();
@@ -119,6 +130,7 @@ onSubmit(e){
         address:this.state.address,
         contact:this.state.contact,
         email:this.state.email,
+        depot:this.state.depotName
     }
 
     //Update Supplier
@@ -198,6 +210,10 @@ onSubmitSites(e){
                             <input type="tel" className="form-control" value={this.state.contact} onChange={this.onChangeContact}/>
                     </div>
     
+                    <div className="form-group">
+                             <label> Depot Name</label>
+                             <input type="text" className="form-control" value={this.state.depotName} onChange={this.onChangeDepot}/>
+                    </div>
     
                   
     

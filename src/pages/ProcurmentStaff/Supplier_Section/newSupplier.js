@@ -13,6 +13,7 @@ export default class NewSupplier extends Component {
         this.onChangeContact = this.onChangeContact.bind(this);
         this.onChangeAddress = this.onChangeAddress.bind(this);
         this.onChangeEmail = this.onChangeEmail.bind(this);
+        this.onChangeDepot = this.onChangeDepot.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
 
         this.state = {
@@ -21,6 +22,7 @@ export default class NewSupplier extends Component {
             contact:'',
             address:'',
             email:'',
+            depotName:''
 
         };
     }
@@ -53,16 +55,23 @@ onChangeEmail(e){
     })
 }
 
+onChangeDepot(e){
+    this.setState({
+        depotName:e.target.value
+    })
+}
+
 
 onSubmit(e){
     e.preventDefault();
 
     const Supplier = {
         address:this.state.address,
-        availability:"test",
+        availability:true,
         contact:this.state.contact,
         email:this.state.email,
         name:this.state.name,
+        depot:this.state.depotName
     }
 
     AddNewSupplier(Supplier);
@@ -113,7 +122,13 @@ onSubmit(e){
                     </div>
                     
     
-                    
+                    <div className="form-group">
+       
+                             <label>Depot Name:</label>
+                            <span><input type="text" className="form-control" value={this.state.depotName} onChange={this.onChangeDepot}/></span>    
+       
+                    </div>
+    
     
                     
                     <center>

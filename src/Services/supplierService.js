@@ -30,7 +30,9 @@ export const UpdateSupplier = (supplier_id,Supplier) => {
         name:Supplier.name,
         address:Supplier.address,
         contact:Supplier.contact,
-        email:Supplier.email
+        email:Supplier.email,
+        availability:true,
+        depot:Supplier.depot
     })
 
 }
@@ -44,10 +46,11 @@ export const AddNewSupplier = (Supplier) => {
     .collection(MyConstClass.Supplier_Table)
     .add({
         address:Supplier.address,
-        availability:"test",
+        availability:true,
         contact:Supplier.contact,
         email:Supplier.email,
         name:Supplier.name,
+        depot:Supplier.depot
         
     })
     
