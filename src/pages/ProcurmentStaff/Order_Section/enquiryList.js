@@ -32,7 +32,7 @@ const EnquiryList = () =>{
     return (
         <>
         <NavBar/>
-        <h1 className="text-capitalize text-center">Enquiries</h1>
+        <h1 className="text-capitalize text-center">Inquiries</h1>
 
         <ul className="list-group my-5">
                 

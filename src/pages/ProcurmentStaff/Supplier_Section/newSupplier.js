@@ -76,7 +76,8 @@ onSubmit(e){
 
     AddNewSupplier(Supplier);
     
-
+         //Alert Display
+         alert('Created Successfully')
 }
 
 

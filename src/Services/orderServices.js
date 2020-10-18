@@ -18,7 +18,7 @@ export const getPendingOrders = () =>{
              return firebase
             .firestore()
             .collection(MyConstClass.Order_Table)
-            .where(MyConstClass.IsDraft,'==',false)
+            .where(MyConstClass.IsCompleted,'==',false)
             .where(MyConstClass.Order_Status,'==',MyConstClass.Pending)
 
 }
@@ -29,7 +29,7 @@ export const getApprovedOrders = () =>{
             return firebase
             .firestore()
             .collection(MyConstClass.Order_Table)
-            .where(MyConstClass.IsDraft,'==',false)
+            .where(MyConstClass.IsCompleted,'==',false)
             .where(MyConstClass.Order_Status,'==',MyConstClass.Approved)
    
 }
@@ -40,7 +40,7 @@ export const getDeclinedOrders = () =>{
             return firebase
             .firestore()
             .collection(MyConstClass.Order_Table)
-            .where(MyConstClass.IsDraft,'==',false)
+            .where(MyConstClass.IsCompleted,'==',false)
             .where(MyConstClass.Order_Status,'==',MyConstClass.Declined)
 }
 
@@ -50,7 +50,7 @@ export const getSentToReferenceOrders = () => {
             return firebase
             .firestore()
             .collection(MyConstClass.Order_Table)
-            .where(MyConstClass.IsDraft,'==',false)
+            .where(MyConstClass.IsCompleted,'==',false)
             .where(MyConstClass.Order_Status,'==',MyConstClass.Sent_To_Reference)
 
 }
@@ -61,7 +61,7 @@ export const getPartiallyApprovedOrders = () => {
     return firebase
     .firestore()
     .collection(MyConstClass.Order_Table)
-    .where(MyConstClass.IsDraft,'==',false)
+    .where(MyConstClass.IsCompleted,'==',false)
     .where(MyConstClass.Order_Status,'==',MyConstClass.Partially_Approved)
 }
 
@@ -120,6 +120,6 @@ export const SetRemarks = (id,remark) =>{
     .collection(MyConstClass.Order_Table)
     .doc(id)
     .update({
-        remarks: remark
+        reason: remark
     })
 }

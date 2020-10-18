@@ -1,6 +1,6 @@
 import React, {useState,useEffect} from 'react'
 import NavBar from '../../../components/main/Navigation_Bar/navbar'
-import firebase from '../../../Firebase'
+import {getAllSuppliers} from '../../../Services/supplierService'
 import { Link } from 'react-router-dom';
 
 
@@ -8,9 +8,7 @@ function useSuppliers(){
     const [suppliers,setSuppliers] = useState([])
 
     useEffect(() => {
-        const unsubscribe = firebase
-            .firestore()
-            .collection('suppliers')
+        const unsubscribe = getAllSuppliers()
             .onSnapshot((snapshot) => {
                 const newSuppliers = snapshot.docs.map((doc) => ({
                     id: doc.id,

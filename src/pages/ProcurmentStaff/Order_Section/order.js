@@ -22,7 +22,7 @@ export default class Order extends Component {
 
             orderId:'', //primary key   
             comment:'',
-            date:Date.now(),
+            date:new Date(),
             description:'',
             draft:false,
             product:'',
@@ -62,17 +62,16 @@ export default class Order extends Component {
         .then(res => {
             this.setState({
                 comment:res.data().comment,
-                date:res.data().date,
                 description:res.data().description,
                 draft:res.data().draft,
                 product:res.data().product,
                 quantity:res.data().quantity,
                 status:res.data().status,
                 supplier:res.data().supplier,
-                total:res.data().total,
+                total:res.data().budget,
                 unit:res.data().unit,
                 orderId:this.props.match.params.id,
-                remarks:res.data().remarks
+                remarks:res.data().reason
         })
 
 
@@ -155,6 +154,10 @@ onSubmit(e){
 
     //set the Order Remark
     SetRemarks(this.props.match.params.id,this.state.remarks);
+
+    alert(this.state.status);
+
+    
     
 }
 
@@ -265,7 +268,7 @@ changeStatus(e) {
     
                      <div className="form-group">
                            <label> Required Date</label>
-                           <input type="text" className="form-control" value={new Date(this.state.date).toDateString()} readOnly />
+                           <input type="text" className="form-control" value={this.state.date} readOnly />
                      </div>
     
                      <div className="form-group">

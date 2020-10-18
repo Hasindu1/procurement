@@ -56,7 +56,10 @@ onSubmit(e){
     e.preventDefault();
 
     setStaffAprovalLimit(this.state.staffApproveLimit);
-    setSiteManagerAprovalLimit(this.state.siteManagerApproveLimit)
+    setSiteManagerAprovalLimit(this.state.siteManagerApproveLimit);
+
+    //Alert display
+    alert('Policy Updated');
 
 
 }

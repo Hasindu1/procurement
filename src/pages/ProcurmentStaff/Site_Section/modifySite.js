@@ -118,7 +118,8 @@ onSubmit(e){
 
     updateSite(this.props.match.params.id,NewSite);
 
-    
+     //Alert Display
+     alert('Modified Successfully')
 
 }
 

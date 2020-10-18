@@ -26,7 +26,7 @@ export default class ModifyItem extends Component {
         .then(res => {
             this.setState({
                 name:res.data().name,
-                unitPrice:res.data().unit_price
+                unitPrice:res.data().price
             })
 
 
@@ -58,6 +58,9 @@ onSubmit(e){
     }
 
     updateItem(this.props.match.params.id , Item);
+
+    //Alert Display
+    alert('Modified Successfully')
  
 }
 

@@ -18,7 +18,7 @@ export default class AuthManagerOrder extends Component {
         this.state = {
             //Order Properties
             comment:'',
-            date:'',
+            date:new Date(),
             description:'',
             draft:'',
             product:'',
@@ -54,16 +54,16 @@ export default class AuthManagerOrder extends Component {
             this.setState({
                 Order: res.data(),
                 comment:res.data().comment,
-                date:res.data().date,
                 description:res.data().description,
                 draft:res.data().draft,
                 product:res.data().product,
                 quantity:res.data().quantity,
                 status:res.data().status,
                 supplier:res.data().supplier,
-                total:res.data().total,
+                total:res.data().budget,
                 unit:res.data().unit,
-                orderId:this.props.match.params.id
+                orderId:this.props.match.params.id,
+                remarks:res.data().reason
             })
 
             getSupplierByName(res.data().supplier)
@@ -135,6 +135,9 @@ onSubmit(e){
 
     //set the Order Remark
     SetRemarks(this.props.match.params.id,this.state.remarks);
+
+    //display alert
+    alert(this.state.status);
     
 
 }
@@ -246,17 +249,15 @@ changeStatus(e) {
     
                      <div className="form-group">
                            <label> Required Date</label>
-                           <input type="date" className="form-control" readOnly />
+                           <input type="text"  value={this.state.date} className="form-control" readOnly />
                      </div>
     
                      <div className="form-group">
                             <label>Description</label>
-                            <textarea id="w3review" name="w3review" rows="4" cols="50" className="form-control" readOnly>
-                                 {this.state.description}
+                            <textarea id="w3review" name="w3review" rows="4" cols="50" value={this.state.description} className="form-control" readOnly>
+                                
                             </textarea>
                      </div>
-    
-                    
     
                     
                     <center>
@@ -271,7 +272,7 @@ changeStatus(e) {
                     <div className="form-group">
                             <label>Remarks</label>
                             <textarea id="w3review" name="w3review" rows="4" cols="50" className="form-control" value={this.state.remarks} onChange={this.onChangeRemarks}>
-                                {this.state.remarks}
+                                
                             </textarea>
                      </div>
     

@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import firebase from '../../../Firebase'
 import {Link} from 'react-router-dom'
 import {AddNewItem} from '../../../Services/itemService'
 
@@ -51,7 +50,8 @@ onSubmit(e){
 
     AddNewItem(Item);
 
-   
+   //Alert Display
+   alert('Created Successfully')
     
 
 }

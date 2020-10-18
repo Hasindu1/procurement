@@ -11,7 +11,7 @@ export const Account_Table = "account"
 export const Enquiry_Table = "enquiries"
 
 //attributes of order collection
-export const IsDraft = "draft"
+export const IsCompleted = "isCompleted"
 export const Order_Status = "status"
 
 //order status types
@@ -36,7 +36,7 @@ export const Supplier = "supplier"
 export const Policy_ID = "p2BrnISwxxVRHEVR5CHK"
 
 //attributes of Account collection
-export const Account_ID = "qtUsrOuR79wWhIYkUC3K"
+export const Account_ID = "KZ25mpa3DYb685SMbaPa"
 
 //login Credentails
 export const Procurement_Staff_User_Name = "ProcStaff@gmail.com"

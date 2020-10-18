@@ -1,14 +1,12 @@
 import React, {useState,useEffect} from 'react'
-import firebase from '../../../Firebase'
 import AuthManagerNavBar from '../../../components/main/Navigation_Bar/authManagerNavBar'
+import {getSites} from '../../../Services/siteServices'
 
 function useSites(){
     const [sites,setSites] = useState([])
 
     useEffect(() => {
-        const unsubscribe = firebase
-            .firestore()
-            .collection('sites')
+        const unsubscribe = getSites()
             .onSnapshot((snapshot) => {
                 const newSites= snapshot.docs.map((doc) => ({
                     id: doc.id,

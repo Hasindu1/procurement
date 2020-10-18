@@ -135,6 +135,9 @@ onSubmit(e){
 
     //Update Supplier
     UpdateSupplier(this.props.match.params.id,Supplier)
+
+     //Alert Display
+     alert('Modified Successfully')
 }
 
 onSubmitSites(e){
